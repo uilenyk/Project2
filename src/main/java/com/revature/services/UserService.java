@@ -1,19 +1,13 @@
 package com.revature.services;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import org.hibernate.type.StringType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.models.User;
+import com.revature.repository.UserRepository;
 import com.revature.util.HibernateUtil;
 
 /**
@@ -25,9 +19,16 @@ import com.revature.util.HibernateUtil;
  *
  */
 
-
+@Service
 public class UserService {
 
+	UserRepository ur;
+	
+	@Autowired
+	public UserService(UserRepository userRepository) {
+		ur = userRepository;
+	}
+	
 	public void create(User user) {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 
