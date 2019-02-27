@@ -39,10 +39,10 @@ public class UserServlet extends HttpServlet {
 		response.setHeader("Content-Type", "application/json");
 		ObjectMapper om = new ObjectMapper().registerModule(new Hibernate5Module());
 		
-		String breed = request.getParameter("breed");
-		String weightOver = request.getParameter("weightOver");
-		String yellow = request.getParameter("yellow");
-		if (breed != null) {
+	//	String breed = request.getParameter("breed");
+		//String weightOver = request.getParameter("weightOver");
+		//String yellow = request.getParameter("yellow");
+	/*	if (breed != null) {
 			// if the breed parameter was set, find bears by breed
 			//List<User> users = userService.getUsersByMessage(user);
 		//	om.writeValue(response.getWriter(), users);
@@ -56,8 +56,8 @@ public class UserServlet extends HttpServlet {
 			String[] arr = request.getRequestURI().split("/");
 			int id = Integer.parseInt(arr[arr.length - 1]);
 		//	Bear bear = bearService.getBear(id);
-		//	om.writeValue(response.getWriter(), bear);
-		}
+		//	om.writeValue(response.getWriter(), bear); */
+		//}
 
 	}
 

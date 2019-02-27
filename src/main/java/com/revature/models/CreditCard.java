@@ -4,21 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="messages")
-public class Message {
+@Table(name="creditcards")
+public class CreditCard {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@OneToOne
+	private User owner;
 	
-	@ManyToMany
-	@JoinColumn(name="message_id")
-	private User messages;
-
+	double balance;
 }
