@@ -24,6 +24,8 @@ import com.revature.util.HibernateUtil;
  * @author mitch
  *
  */
+
+
 public class UserService {
 
 	public void create(User user) {
