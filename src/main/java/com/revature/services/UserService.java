@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Users;
-import com.revature.repositories.UserRepository;
+import com.revature.repository.UserRepository;
 
 @Service
 public class UserService {
