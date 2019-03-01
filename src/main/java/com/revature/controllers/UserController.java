@@ -6,24 +6,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.Users;
+import com.revature.models.User;
 import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-	UserService userService;
+	private UserService userService;
 	
 	@Autowired
 	public UserController(UserService userService) {
-		super();
 		this.userService = userService;
 	}
 
 
 	@PostMapping("")
-	public Users saveBook(@RequestBody Users user) {
+	public User saveBook(@RequestBody User user) {
 		return this.userService.createUser(user);
 	}
 }

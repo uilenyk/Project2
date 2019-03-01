@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +26,12 @@ public class Users {
 	private String email;
 	private BigDecimal balance;
 
-	public Users() {
+	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Users(int id, String firstName, String lastName, String phoneNumber, String address, String password,
+	public User(int id, String firstName, String lastName, String phoneNumber, String address, String password,
 			String username, String email, BigDecimal balance) {
 		super();
 		this.id = id;
@@ -141,7 +141,7 @@ public class Users {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		User other = (User) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;

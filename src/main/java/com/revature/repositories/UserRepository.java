@@ -1,4 +1,4 @@
-package com.revature.repository;
+package com.revature.repositories;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.revature.models.Users;
+import com.revature.models.User;
 
 @Repository
 public class UserRepository {
@@ -15,10 +15,8 @@ public class UserRepository {
 	@Autowired
 	EntityManagerFactory emf;
 
-	
-	public Users createBook(Users user) {
+	public User createBook(User user) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		
 		try(Session session = sf.openSession()) {
 			int id = (int) session.save(user);
 			user.setId(id);
