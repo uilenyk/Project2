@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.revature.dto.UsersDto;
 import com.revature.models.Users;
 
 @Repository
@@ -30,12 +31,25 @@ public class UserRepository {
 
 	public Users login(Users user) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		Users loginUser = new Users();
+		
 		try (Session session = sf.openSession()) {
-			loginUser = session.get(Users.class, user.getEmail());
+			session.get(Users.class, user.getEmail());
 		}
-			return loginUser;
+			return user;
 		}
+
+	public List<Users> findUserByCredentials(UsersDto user) {
+		List<Users> users = null;
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			Query query = session.createQuery("From users u WHERE u.password = :password AND u.email = :email");
+			query.setParameter("password", user.getPassword());
+			query.setParameter("email", user.getEmail());
+			users = query.getResultList();
+			System.out.println(users);
+			return users;
+		} 
+	}
 	}
 	// public ResponseEntity<Message> getMessages(@PathVariable int id) {
 
