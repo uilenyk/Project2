@@ -29,7 +29,7 @@ public class UserController {
 	public void login(@RequestBody Users user) {
 		System.out.println("login");
 		Users loginUser = this.userService.login(user);
-		System.out.println(loginUser.getFirstName());
+		System.out.println(loginUser.getFirstName() );
 	}
 	
 	@PostMapping("")
