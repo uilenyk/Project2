@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -15,13 +18,12 @@ import javax.persistence.Table;
 @NamedQuery(name = "CreditCard.findAll", query = "SELECT c FROM CreditCard c")
 public class CreditCard implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	private BigDecimal balance;
-
-	// bi-directional one-to-one association to MarketPlaceUser
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "mpuid")
-	private MarketPlaceUser marketPlaceUser;
 
 	public CreditCard() {
 	}
@@ -32,14 +34,6 @@ public class CreditCard implements Serializable {
 
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
-	}
-
-	public MarketPlaceUser getMarketPlaceUser() {
-		return this.marketPlaceUser;
-	}
-
-	public void setMarketPlaceUser(MarketPlaceUser marketPlaceUser) {
-		this.marketPlaceUser = marketPlaceUser;
 	}
 
 }

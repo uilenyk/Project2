@@ -28,8 +28,21 @@ public class Listing implements Serializable {
 	private Timestamp timeout;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
-	@OneToMany(mappedBy = "listing")
-	private List<MarketPlaceUserListing> marketPlaceUserListings;
+	@ManyToOne
+	@JoinColumn(name="mpu_id")
+	private MarketPlaceUser owner;
+
+	public MarketPlaceUser getOwner() {
+		return owner;
+	}
+
+	public void setOwner(MarketPlaceUser owner) {
+		this.owner = owner;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Listing() {
 	}
@@ -88,26 +101,6 @@ public class Listing implements Serializable {
 
 	public void setTimeout(Timestamp timeout) {
 		this.timeout = timeout;
-	}
-
-	public List<MarketPlaceUserListing> getMarketPlaceUserListings() {
-		return this.marketPlaceUserListings;
-	}
-
-	public void setMarketPlaceUserListings(List<MarketPlaceUserListing> marketPlaceUserListings) {
-		this.marketPlaceUserListings = marketPlaceUserListings;
-	}
-
-	public MarketPlaceUserListing addMarketPlaceUserListing(MarketPlaceUserListing marketPlaceUserListing) {
-		getMarketPlaceUserListings().add(marketPlaceUserListing);
-		marketPlaceUserListing.setListing(this);
-		return marketPlaceUserListing;
-	}
-
-	public MarketPlaceUserListing removeMarketPlaceUserListing(MarketPlaceUserListing marketPlaceUserListing) {
-		getMarketPlaceUserListings().remove(marketPlaceUserListing);
-		marketPlaceUserListing.setListing(null);
-		return marketPlaceUserListing;
 	}
 
 }

@@ -7,19 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.apache.tomcat.jni.Address;
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
+import com.revature.models.Address;
 
 @Entity
 @Table(name = "market_place_user")
-@NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m"),
-		@NamedQuery(name = "MarketPlaceUser.findPasswordByUserCredentials", query = "SELECT mpu FROM MarketPlaceUser mpu WHERE mpu.email = :email") })
+@NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m")})
 public class MarketPlaceUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,24 +33,24 @@ public class MarketPlaceUser implements Serializable {
 	private String pseudoname;
 
 	// bi-directional one-to-one association to Address
-	@OneToOne(mappedBy = "marketPlaceUser")
+	@OneToOne
+	@JoinColumn(name="mpu_address_id")
 	private Address address;
 
-	// bi-directional one-to-one association to Credential
-	@OneToOne(mappedBy = "marketPlaceUser")
-	private Credential credential;
-
 	// bi-directional one-to-one association to CreditCard
-	@OneToOne(mappedBy = "marketPlaceUser")
+	@OneToOne
+	@JoinColumn(name="credit_card_id")
 	private CreditCard creditCard;
 
 	// bi-directional one-to-one association to PhoneNumber
-	@OneToOne(mappedBy = "marketPlaceUser")
+	@OneToOne
+	@JoinColumn(name="phone_number_id")
 	private PhoneNumber phoneNumber;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
-	@OneToMany(mappedBy = "marketPlaceUser")
-	private List<MarketPlaceUserListing> marketPlaceUserListings;
+	@OneToMany
+	@JoinColumn(name="mpu_id")
+	private List<Listing> marketPlaceUserListings;
 
 	public MarketPlaceUser() {
 	}
@@ -96,14 +95,6 @@ public class MarketPlaceUser implements Serializable {
 		this.address = address;
 	}
 
-	public Credential getCredential() {
-		return this.credential;
-	}
-
-	public void setCredentials(Credential credential) {
-		this.credential = credential;
-	}
-
 	public CreditCard getCreditCard() {
 		return this.creditCard;
 	}
@@ -120,24 +111,16 @@ public class MarketPlaceUser implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<MarketPlaceUserListing> getMarketPlaceUserListings() {
-		return this.marketPlaceUserListings;
+	public List<Listing> getMarketPlaceUserListings() {
+		return marketPlaceUserListings;
 	}
 
-	public void setMarketPlaceUserListings(List<MarketPlaceUserListing> marketPlaceUserListings) {
+	public void setMarketPlaceUserListings(List<Listing> marketPlaceUserListings) {
 		this.marketPlaceUserListings = marketPlaceUserListings;
 	}
 
-	public MarketPlaceUserListing addMarketPlaceUserListing(MarketPlaceUserListing marketPlaceUserListing) {
-		getMarketPlaceUserListings().add(marketPlaceUserListing);
-		marketPlaceUserListing.setMarketPlaceUser(this);
-		return marketPlaceUserListing;
-	}
-
-	public MarketPlaceUserListing removeMarketPlaceUserListing(MarketPlaceUserListing marketPlaceUserListing) {
-		getMarketPlaceUserListings().remove(marketPlaceUserListing);
-		marketPlaceUserListing.setMarketPlaceUser(null);
-		return marketPlaceUserListing;
+	public void setPhoneNumber(PhoneNumber phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }

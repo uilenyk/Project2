@@ -21,8 +21,7 @@ public class PhoneNumber implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "phone_number_id")
-	private Integer phoneNumberId;
+	private int id;
 
 	@Column(name = "area_code_three")
 	private Integer areaCodeThree;
@@ -33,20 +32,15 @@ public class PhoneNumber implements Serializable {
 	@Column(name = "block_three")
 	private Integer blockThree;
 
-	// bi-directional one-to-one association to MarketPlaceUser
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "mpuid")
-	private MarketPlaceUser marketPlaceUser;
-
 	public PhoneNumber() {
 	}
-
-	public Integer getPhoneNumberId() {
-		return this.phoneNumberId;
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setPhoneNumberId(Integer phoneNumberId) {
-		this.phoneNumberId = phoneNumberId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Integer getAreaCodeThree() {
@@ -71,14 +65,6 @@ public class PhoneNumber implements Serializable {
 
 	public void setBlockThree(Integer blockThree) {
 		this.blockThree = blockThree;
-	}
-
-	public MarketPlaceUser getMarketPlaceUser() {
-		return this.marketPlaceUser;
-	}
-
-	public void setMarketPlaceUser(MarketPlaceUser marketPlaceUser) {
-		this.marketPlaceUser = marketPlaceUser;
 	}
 
 }

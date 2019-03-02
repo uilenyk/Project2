@@ -26,12 +26,12 @@ public class MarketPlaceUserRepository {
 		}
 	}
 	
-	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
-		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try (Session session = sf.openSession()) {
-			Query<?> query = session.getNamedQuery("findPasswordByUserCredentials");
-			query.setParameter("email", loginRequest.getEmail());
-			return (MarketPlaceUser) query.getSingleResult();
-		}
-	}
+//	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
+//		SessionFactory sf = emf.unwrap(SessionFactory.class);
+//		try (Session session = sf.openSession()) {
+//			Query<?> query = session.getNamedQuery("findPasswordByUserCredentials");
+//			query.setParameter("email", loginRequest.getEmail());
+//			return (MarketPlaceUser) query.getSingleResult();
+//		}
+//	}
 }

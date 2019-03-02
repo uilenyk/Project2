@@ -1,12 +1,25 @@
 package com.revature.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
 public class Address implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	private String city;
 
@@ -18,14 +31,18 @@ public class Address implements Serializable {
 
 	private Integer zipcode;
 
-	// bi-directional one-to-one association to MarketPlaceUser
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "mpuid")
-	private MarketPlaceUser marketPlaceUser;
 
 	public Address() {
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getCity() {
 		return this.city;
 	}
@@ -64,14 +81,6 @@ public class Address implements Serializable {
 
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
-	}
-
-	public MarketPlaceUser getMarketPlaceUser() {
-		return this.marketPlaceUser;
-	}
-
-	public void setMarketPlaceUser(MarketPlaceUser marketPlaceUser) {
-		this.marketPlaceUser = marketPlaceUser;
 	}
 
 }

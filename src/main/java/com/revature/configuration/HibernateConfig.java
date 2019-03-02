@@ -10,25 +10,32 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.revature.models.Address;
+import com.revature.models.Credential;
+import com.revature.models.CreditCard;
+import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
+import com.revature.models.PhoneNumber;
 
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
-	
+
 	@Bean
 	public LocalSessionFactoryBean getSessionFactory() {
 		System.out.println("Configuring session factory");
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
-		
+
 		// Set annotated Classes
-		factoryBean.setAnnotatedClasses(MarketPlaceUser.class);
+		Class[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
+				PhoneNumber.class };
+		factoryBean.setAnnotatedClasses(models);
 		factoryBean.setDataSource(getDataSource());
 		return factoryBean;
 	}
-	
-	@Bean(name="dataSource")
+
+	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
 		System.out.println("Configuring data source");
 		BasicDataSource dataSource = new BasicDataSource();
@@ -38,7 +45,7 @@ public class HibernateConfig {
 		dataSource.setPassword(System.getenv("PROJECT2_PASS"));
 		return dataSource;
 	}
-	
+
 	@Bean
 	public HibernateTransactionManager getTransactionManager() {
 		System.out.println("Configuring transaction manager");
@@ -46,6 +53,5 @@ public class HibernateConfig {
 		transactionManager.setSessionFactory(getSessionFactory().getObject());
 		return transactionManager;
 	}
-	
-	
+
 }
