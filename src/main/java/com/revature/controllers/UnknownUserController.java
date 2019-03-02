@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.Credential;
 import com.revature.models.MarketPlaceUser;
 import com.revature.models.requests.LoginRequest;
-import com.revature.services.MarketPlaceLoginService;
+import com.revature.services.UnknownUserService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/login")
-public class MarketPlaceUserLoginController {
+@RequestMapping("/unknown")
+public class UnknownUserController {
 
 	@Autowired
-	private MarketPlaceLoginService service;
+	private UnknownUserService service;
 
-	@PostMapping(path="")
+	@PostMapping(path="/login")
 	public ResponseEntity<MarketPlaceUser> login(@RequestBody LoginRequest loginRequest) {
 		MarketPlaceUser marketPlaceUser = service.auth(loginRequest);
 		if (marketPlaceUser != null) {
@@ -31,4 +32,13 @@ public class MarketPlaceUserLoginController {
 		}
 	}
 
+	@PostMapping("/signup")
+	public ResponseEntity<MarketPlaceUser> signup(@RequestBody Credential cred){
+		MarketPlaceUser user = service.create(cred);
+		if (user != null) {
+			return new ResponseEntity<MarketPlaceUser>(user, HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
+		}
+	}
 }
