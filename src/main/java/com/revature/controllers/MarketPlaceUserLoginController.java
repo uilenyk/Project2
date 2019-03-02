@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.MarketPlaceUser;
 import com.revature.models.requests.LoginRequest;
-import com.revature.services.MarketPlaceUserService;
+import com.revature.services.MarketPlaceLoginService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -19,11 +19,11 @@ import com.revature.services.MarketPlaceUserService;
 public class MarketPlaceUserLoginController {
 
 	@Autowired
-	private MarketPlaceUserService service;
+	private MarketPlaceLoginService service;
 
 	@PostMapping(path="")
 	public ResponseEntity<MarketPlaceUser> login(@RequestBody LoginRequest loginRequest) {
-		MarketPlaceUser marketPlaceUser = service.findUserByCredentials(loginRequest);
+		MarketPlaceUser marketPlaceUser = service.auth(loginRequest);
 		if (marketPlaceUser != null) {
 			return new ResponseEntity<MarketPlaceUser>(marketPlaceUser, HttpStatus.OK);
 		} else {
