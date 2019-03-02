@@ -11,12 +11,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-@NamedQueries({ 
-	@NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m"),
-	@NamedQuery(name = "MarketPlaceUser.findPasswordByUserCredentials", query = "SELECT mpu FROM MarketPlaceUser mpu WHERE mpu.email = :email") 
-	})
+@Table(name = "market_place_user")
+@NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m"),
+		@NamedQuery(name = "MarketPlaceUser.findPasswordByUserCredentials", query = "SELECT mpu FROM MarketPlaceUser mpu WHERE mpu.email = :email") })
 public class MarketPlaceUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 

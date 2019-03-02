@@ -18,7 +18,7 @@ public class CreditCard implements Serializable {
 
 	private BigDecimal balance;
 
-	// bi-directional many-to-one association to MarketPlaceUser
+	// bi-directional one-to-one association to MarketPlaceUser
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpuid")
 	private MarketPlaceUser marketPlaceUser;
