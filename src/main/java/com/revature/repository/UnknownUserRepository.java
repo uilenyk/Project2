@@ -46,17 +46,17 @@ public class UnknownUserRepository {
 		}
 	}
 
-	public MarketPlaceUser createUser(CreateUserRequest cur) {
+	public MarketPlaceUser createUser(Credential cred) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
-			int newUserId = (int) session.save(cur.getUser());
-			cur.getUser().setMpuid(newUserId);
-			session.persist(cur.getCredential());
+			session.persist(cred);
+			session.flush();
 			tx.commit();
+			int newUserId = cred.getMarketPlaceUser().getMpuid();
 			if(newUserId != 0)
-				return cur.getUser();
+				return cred.getMarketPlaceUser();
 			else 
 				return null;
 		}

@@ -27,8 +27,8 @@ public class UnknownUserService {
 		return null;
 	}
 
-	public MarketPlaceUser create(CreateUserRequest cur) {
-		MarketPlaceUser user = repository.createUser(cur);
+	public MarketPlaceUser create(Credential cred) {
+		MarketPlaceUser user = repository.createUser(cred);
 		if(user == null) {
 			return null;
 		} else {

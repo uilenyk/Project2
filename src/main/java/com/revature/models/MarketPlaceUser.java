@@ -3,7 +3,9 @@ package com.revature.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +15,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.revature.models.Address;
 
 @Entity
 @Table(name = "market_place_user")
@@ -33,22 +33,22 @@ public class MarketPlaceUser implements Serializable {
 	private String pseudoname;
 
 	// bi-directional one-to-one association to Address
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="mpu_address_id")
 	private Address address;
 
 	// bi-directional one-to-one association to CreditCard
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="credit_card_id")
 	private CreditCard creditCard;
 
 	// bi-directional one-to-one association to PhoneNumber
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="phone_number_id")
 	private PhoneNumber phoneNumber;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
-	@OneToMany
+	@OneToMany()
 	@JoinColumn(name="mpu_id")
 	private List<Listing> marketPlaceUserListings;
 
