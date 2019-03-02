@@ -1,197 +1,140 @@
 package com.revature.models;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-@Entity(name = "MarketPlaceUser")
-@NamedQueries({
-		@NamedQuery(name = "findPasswordByUserCredentials", query = "SELECT mpu FROM MarketPlaceUser mpu WHERE mpu.email = :email") })
-public class MarketPlaceUser {
+@Entity
+@NamedQueries({ 
+	@NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m"),
+	@NamedQuery(name = "MarketPlaceUser.findPasswordByUserCredentials", query = "SELECT mpu FROM MarketPlaceUser mpu WHERE mpu.email = :email") 
+	})
+public class MarketPlaceUser implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
-	@Column(name = "phone_number")
-	private String phoneNumber;
-	private String address;
-	private String password;
-	private String username;
-	private String email;
-	private BigDecimal balance;
+	private Integer mpuid;
+
+	private String firstname;
+
+	private String lastname;
+
+	private String pseudoname;
+
+	// bi-directional one-to-one association to Address
+	@OneToOne(mappedBy = "marketPlaceUser")
+	private Address address;
+
+	// bi-directional one-to-one association to Credential
+	@OneToOne(mappedBy = "marketPlaceUser")
+	private Credential credential;
+
+	// bi-directional one-to-one association to CreditCard
+	@OneToOne(mappedBy = "marketPlaceUser")
+	private CreditCard creditCard;
+
+	// bi-directional one-to-one association to PhoneNumber
+	@OneToOne(mappedBy = "marketPlaceUser")
+	private PhoneNumber phoneNumber;
+
+	// bi-directional many-to-one association to MarketPlaceUserListing
+	@OneToMany(mappedBy = "marketPlaceUser")
+	private List<MarketPlaceUserListing> marketPlaceUserListings;
 
 	public MarketPlaceUser() {
 	}
 
-	public MarketPlaceUser(int id, String firstName, String lastName, String phoneNumber, String address,
-			String password, String username, String email, BigDecimal balance) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.password = password;
-		this.username = username;
-		this.email = email;
-		this.balance = balance;
+	public Integer getMpuid() {
+		return this.mpuid;
 	}
 
-	public int getId() {
-		return id;
+	public void setMpuid(Integer mpuid) {
+		this.mpuid = mpuid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getFirstname() {
+		return this.firstname;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public String getLastname() {
+		return this.lastname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String getPseudoname() {
+		return this.pseudoname;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public void setPseudoname(String pseudoname) {
+		this.pseudoname = pseudoname;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public Address getAddress() {
+		return this.address;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
-	public String getPassword() {
-		return password;
+	public Credential getCredential() {
+		return this.credential;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCredentials(Credential credential) {
+		this.credential = credential;
 	}
 
-	public String getUsername() {
-		return username;
+	public CreditCard getCreditCard() {
+		return this.creditCard;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 
-	public String getEmail() {
-		return email;
+	public PhoneNumber getPhoneNumber() {
+		return this.phoneNumber;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPhoneNumbers(PhoneNumber phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public BigDecimal getBalance() {
-		return balance;
+	public List<MarketPlaceUserListing> getMarketPlaceUserListings() {
+		return this.marketPlaceUserListings;
 	}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+	public void setMarketPlaceUserListings(List<MarketPlaceUserListing> marketPlaceUserListings) {
+		this.marketPlaceUserListings = marketPlaceUserListings;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((balance == null) ? 0 : balance.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+	public MarketPlaceUserListing addMarketPlaceUserListing(MarketPlaceUserListing marketPlaceUserListing) {
+		getMarketPlaceUserListings().add(marketPlaceUserListing);
+		marketPlaceUserListing.setMarketPlaceUser(this);
+		return marketPlaceUserListing;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MarketPlaceUser other = (MarketPlaceUser) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (balance == null) {
-			if (other.balance != null)
-				return false;
-		} else if (!balance.equals(other.balance))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public MarketPlaceUserListing removeMarketPlaceUserListing(MarketPlaceUserListing marketPlaceUserListing) {
+		getMarketPlaceUserListings().remove(marketPlaceUserListing);
+		marketPlaceUserListing.setMarketPlaceUser(null);
+		return marketPlaceUserListing;
 	}
 
-	@Override
-	public String toString() {
-		return "MarketPlaceUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", address=" + address + ", password=" + password + ", username=" + username
-				+ ", email=" + email + ", balance=" + balance + "]";
-	}
 }
