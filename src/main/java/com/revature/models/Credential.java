@@ -132,4 +132,11 @@ public class Credential implements Serializable {
 		this.marketPlaceUser = marketPlaceUser;
 	}
 
+	@Override
+	public String toString() {
+		return "Credential [id=" + id + ", email=" + email + ", password=" + password + ", salt=" + salt
+				+ ", marketPlaceUser=" + marketPlaceUser + "]";
+	}
+
+	
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.revature.models.Credential;
 import com.revature.models.MarketPlaceUser;
-import com.revature.models.requests.CreateUserRequest;
 import com.revature.models.requests.LoginRequest;
 import com.revature.repository.UnknownUserRepository;
 

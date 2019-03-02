@@ -24,7 +24,7 @@ public class MarketPlaceUser implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer mpuid;
+	private int mpuid;
 
 	private String firstname;
 
@@ -33,17 +33,17 @@ public class MarketPlaceUser implements Serializable {
 	private String pseudoname;
 
 	// bi-directional one-to-one association to Address
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="mpu_address_id")
 	private Address address;
 
 	// bi-directional one-to-one association to CreditCard
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="credit_card_id")
 	private CreditCard creditCard;
 
 	// bi-directional one-to-one association to PhoneNumber
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="phone_number_id")
 	private PhoneNumber phoneNumber;
 
@@ -55,11 +55,11 @@ public class MarketPlaceUser implements Serializable {
 	public MarketPlaceUser() {
 	}
 
-	public Integer getMpuid() {
+	public int getMpuid() {
 		return this.mpuid;
 	}
 
-	public void setMpuid(Integer mpuid) {
+	public void setMpuid(int mpuid) {
 		this.mpuid = mpuid;
 	}
 
@@ -121,6 +121,77 @@ public class MarketPlaceUser implements Serializable {
 
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((creditCard == null) ? 0 : creditCard.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((marketPlaceUserListings == null) ? 0 : marketPlaceUserListings.hashCode());
+		result = prime * result + mpuid;
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((pseudoname == null) ? 0 : pseudoname.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MarketPlaceUser other = (MarketPlaceUser) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (creditCard == null) {
+			if (other.creditCard != null)
+				return false;
+		} else if (!creditCard.equals(other.creditCard))
+			return false;
+		if (firstname == null) {
+			if (other.firstname != null)
+				return false;
+		} else if (!firstname.equals(other.firstname))
+			return false;
+		if (lastname == null) {
+			if (other.lastname != null)
+				return false;
+		} else if (!lastname.equals(other.lastname))
+			return false;
+		if (marketPlaceUserListings == null) {
+			if (other.marketPlaceUserListings != null)
+				return false;
+		} else if (!marketPlaceUserListings.equals(other.marketPlaceUserListings))
+			return false;
+		if (mpuid != other.mpuid)
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		if (pseudoname == null) {
+			if (other.pseudoname != null)
+				return false;
+		} else if (!pseudoname.equals(other.pseudoname))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "MarketPlaceUser [mpuid=" + mpuid + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", pseudoname=" + pseudoname + ", address=" + address + ", creditCard=" + creditCard
+				+ ", phoneNumber=" + phoneNumber + ", marketPlaceUserListings=" + marketPlaceUserListings + "]";
 	}
 
 }

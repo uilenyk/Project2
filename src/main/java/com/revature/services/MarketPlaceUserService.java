@@ -17,6 +17,17 @@ public class MarketPlaceUserService {
 		return repository.create(marketPlaceUser);
 	}
 
+	public MarketPlaceUser updateUser(MarketPlaceUser user) {
+		System.out.println(user.toString());
+		MarketPlaceUser u = repository.update(user);
+		if(u != null) {
+			return u;
+		} else {
+			return null;
+		}
+		
+	}
+
 //	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
 //		return repository.findUserByCredentials(loginRequest);
 //	}
