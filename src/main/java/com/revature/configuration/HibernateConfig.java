@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.revature.models.Users;
+import com.revature.models.MarketPlaceUser;
 
 @Configuration
 @EnableTransactionManagement
@@ -23,7 +23,7 @@ public class HibernateConfig {
 		factoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 		
 		// Set annotated Classes
-		factoryBean.setAnnotatedClasses(Users.class);
+		factoryBean.setAnnotatedClasses(MarketPlaceUser.class);
 		factoryBean.setDataSource(getDataSource());
 		return factoryBean;
 	}

@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-@Entity(name="users")
-public class Users {
+@Entity(name = "MarketPlaceUser")
+@NamedQueries({
+		@NamedQuery(name = "findPasswordByUserCredentials", query = "SELECT mpu FROM MarketPlaceUser mpu WHERE mpu.email = :email") })
+public class MarketPlaceUser {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +30,11 @@ public class Users {
 	private String email;
 	private BigDecimal balance;
 
-	public Users() {
-		super();
-		// TODO Auto-generated constructor stub
+	public MarketPlaceUser() {
 	}
 
-	public Users(int id, String firstName, String lastName, String phoneNumber, String address, String password,
-			String username, String email, BigDecimal balance) {
-		super();
+	public MarketPlaceUser(int id, String firstName, String lastName, String phoneNumber, String address,
+			String password, String username, String email, BigDecimal balance) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -142,7 +142,7 @@ public class Users {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		MarketPlaceUser other = (MarketPlaceUser) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -190,9 +190,8 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+		return "MarketPlaceUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
 				+ phoneNumber + ", address=" + address + ", password=" + password + ", username=" + username
 				+ ", email=" + email + ", balance=" + balance + "]";
 	}
-
 }
