@@ -21,7 +21,7 @@ public class MarketPlaceUserRepository {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			int id = (int) session.save(marketPlaceUser);
-			marketPlaceUser.setId(id);
+			marketPlaceUser.setMpuid(id);
 			return marketPlaceUser;
 		}
 	}

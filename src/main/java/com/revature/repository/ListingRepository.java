@@ -22,7 +22,7 @@ public class ListingRepository {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			int id = (int) session.save(listing);
-			listing.setId(id);
+			listing.setListid(id);
 			return listing;
 		}
 	}

@@ -15,7 +15,7 @@ public class ListingService {
 	private ListingRepository repository;
 
 	public Listing getListingById(int id) {
-		return repository.getListingById(id);
+		return repository.findListingById(id);
 	}
 
 	public List<Listing> findAllListings() {

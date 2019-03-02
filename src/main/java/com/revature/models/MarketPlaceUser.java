@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.tomcat.jni.Address;
+import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties.Credential;
+
 @Entity
 @Table(name = "market_place_user")
 @NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m"),
