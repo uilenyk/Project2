@@ -1,10 +1,19 @@
 package com.revature.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @NamedQuery(name = "Listing.findAll", query = "SELECT l FROM Listing l")
@@ -28,8 +37,9 @@ public class Listing implements Serializable {
 	private Timestamp timeout;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
-	@ManyToOne
-	@JoinColumn(name="mpu_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "mpu_id")
+	@JsonBackReference
 	private MarketPlaceUser owner;
 
 	public MarketPlaceUser getOwner() {

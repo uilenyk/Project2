@@ -32,16 +32,13 @@ public class ListingRepository {
 	}
 
 	public List<Listing> findMarketPlaceUserListingsById(int id) {
-		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try (Session session = sf.openSession()) {
-			return null;
-		}
+		return null;
 	}
 
 	public List<Listing> findAllListings() {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
-			Query<?> query = session.getNamedQuery("findAllListings");
+			Query<?> query = session.getNamedQuery("Listing.findAll");
 			List<Listing> listings = (List<Listing>) query.getResultList();
 			return listings;
 		}

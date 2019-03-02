@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.services.ListingService;
+import com.revature.models.Listing;
+import com.revature.models.MarketPlaceUser;
 import com.revature.services.MarketPlaceUserService;
 
 @RestController
@@ -19,24 +22,34 @@ import com.revature.services.MarketPlaceUserService;
 public class MarketPlaceUserController {
 
 	@Autowired
-	private MarketPlaceUserService marketPlaceUserService;
+	private MarketPlaceUserService service;
 
-	@Autowired
-	private ListingService listingService;
+	@GetMapping(path = "/{mpuid}")
+	public @ResponseBody ResponseEntity<MarketPlaceUser> findMarketPlaceUserById(@PathVariable("mpuid") String mpuid) {
+		MarketPlaceUser marketPlaceUser = service.findBy(Integer.parseInt(mpuid));
+		if (marketPlaceUser != null) {
+			return new ResponseEntity<>(marketPlaceUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@GetMapping(path = "/{mpuid}/listings/{listid}")
-	public @ResponseBody ResponseEntity<?> getMarketPlaceUserListingsById(@PathVariable("mpuid") String mpuid,
+	public @ResponseBody ResponseEntity<Listing> findMarketPlaceUserListingsById(
+			@PathVariable("mpuid") String mpuid,
 			@PathVariable("listid") String listid) {
-		int mpuId = Integer.parseInt(mpuid);
 		int listId = Integer.parseInt(listid);
-
-		/*
-		 * Write service class to find market place user listings
-		 */
-
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		MarketPlaceUser marketPlaceUser = service.findBy(Integer.parseInt(mpuid));
+		if (marketPlaceUser != null) {
+			List<Listing> listings = marketPlaceUser.getMarketPlaceUserListings();
+			for (int i = 0; i < listings.size(); i++) {
+				Listing listing = listings.get(i);
+				if (listing.getListid().equals(listId)) {
+					return new ResponseEntity<>(listing, HttpStatus.OK);
+				}
+			}
+		}
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
-	
-	
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,11 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.revature.models.Address;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "market_place_user")
-@NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m")})
+@NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m") })
 public class MarketPlaceUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,22 +35,23 @@ public class MarketPlaceUser implements Serializable {
 
 	// bi-directional one-to-one association to Address
 	@OneToOne
-	@JoinColumn(name="mpu_address_id")
+	@JoinColumn(name = "mpu_address_id")
 	private Address address;
 
 	// bi-directional one-to-one association to CreditCard
 	@OneToOne
-	@JoinColumn(name="credit_card_id")
+	@JoinColumn(name = "credit_card_id")
 	private CreditCard creditCard;
 
 	// bi-directional one-to-one association to PhoneNumber
 	@OneToOne
-	@JoinColumn(name="phone_number_id")
+	@JoinColumn(name = "phone_number_id")
 	private PhoneNumber phoneNumber;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
-	@OneToMany
-	@JoinColumn(name="mpu_id")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "mpu_id")
+	@JsonManagedReference
 	private List<Listing> marketPlaceUserListings;
 
 	public MarketPlaceUser() {
