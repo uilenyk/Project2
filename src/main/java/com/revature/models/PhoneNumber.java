@@ -67,4 +67,51 @@ public class PhoneNumber implements Serializable {
 		this.blockThree = blockThree;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((areaCodeThree == null) ? 0 : areaCodeThree.hashCode());
+		result = prime * result + ((blockFour == null) ? 0 : blockFour.hashCode());
+		result = prime * result + ((blockThree == null) ? 0 : blockThree.hashCode());
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PhoneNumber other = (PhoneNumber) obj;
+		if (areaCodeThree == null) {
+			if (other.areaCodeThree != null)
+				return false;
+		} else if (!areaCodeThree.equals(other.areaCodeThree))
+			return false;
+		if (blockFour == null) {
+			if (other.blockFour != null)
+				return false;
+		} else if (!blockFour.equals(other.blockFour))
+			return false;
+		if (blockThree == null) {
+			if (other.blockThree != null)
+				return false;
+		} else if (!blockThree.equals(other.blockThree))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "PhoneNumber [id=" + id + ", areaCodeThree=" + areaCodeThree + ", blockFour=" + blockFour
+				+ ", blockThree=" + blockThree + "]";
+	}
+
+	
 }

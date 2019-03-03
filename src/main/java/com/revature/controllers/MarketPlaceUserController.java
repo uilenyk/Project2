@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -65,6 +67,17 @@ public class MarketPlaceUserController {
 			return new ResponseEntity<>(results.get(0), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	}
+
+	@PutMapping("/personal/update")
+	public @ResponseBody ResponseEntity<?> updateUser(@RequestBody MarketPlaceUser user) {
+		System.out.println(user.toString());
+		MarketPlaceUser updatedUser = marketPlaceUserService.updateUser(user);
+		if (updatedUser != null) {
+			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
+		}
 	}
 
 }
