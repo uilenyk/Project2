@@ -12,13 +12,13 @@ public class MarketPlaceUserService {
 
 	@Autowired
 	private MarketPlaceUserRepository repository;
-
-	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
-		return repository.create(marketPlaceUser);
-	}
 	
 	public MarketPlaceUser findBy(int id) {
 		return repository.findBy(id);
+	}
+	
+	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
+		return repository.create(marketPlaceUser);
 	}
 
 }

@@ -16,6 +16,15 @@ public class MarketPlaceUserRepository {
 	@Autowired
 	private EntityManagerFactory emf;
 
+	public MarketPlaceUser findBy(int id) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			MarketPlaceUser marketPlaceUser = session.find(MarketPlaceUser.class, id);
+			Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
+			return marketPlaceUser;
+		}
+	}
+
 	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
@@ -24,14 +33,5 @@ public class MarketPlaceUserRepository {
 			return marketPlaceUser;
 		}
 	}
-	
-	public MarketPlaceUser findBy(int id) {
-		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()) {
-			MarketPlaceUser marketPlaceUser = session.find(MarketPlaceUser.class, id);
-		    Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
-		    return marketPlaceUser;
-		}
-	}
-	
+
 }
