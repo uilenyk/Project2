@@ -13,8 +13,9 @@ public class MessageService {
 	private MessageRepository repository;
 
 	public Message createMessage(Message newMessage) {
-		Message message = repository.createMessage(newMessage);
 		MarketPlaceUserService mpus = new MarketPlaceUserService();
+		//mpus.
+		Message message = repository.createMessage(newMessage);
 		mpus.messageAlert(newMessage.getReceiver());
 		if(message != null) {
 			return message;

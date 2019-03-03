@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -25,12 +28,12 @@ public class Message {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="sender_id")
-	@JsonManagedReference
+	@JsonBackReference(value="sent_messages")
 	private MarketPlaceUser sender;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="receiver_id")
-	@JsonManagedReference
+	@JsonBackReference(value="received_messages")
 	private MarketPlaceUser receiver;
 	
 	@OneToOne
@@ -41,7 +44,7 @@ public class Message {
 	private String subject;
 	@Column(length=750)
 	private String content;
-	//@Column(columnDefinition="default now()")
+	@CreationTimestamp
 	private Timestamp created;
 
 	public Message(int id, MarketPlaceUser sender, MarketPlaceUser receiver, Message parent, String subject,

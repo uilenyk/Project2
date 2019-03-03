@@ -28,43 +28,66 @@ public class MarketPlaceUserRepository {
 		}
 	}
 
-	public MarketPlaceUser update(MarketPlaceUser user) {
-		System.out.println(user.toString());
+	public MarketPlaceUser update(MarketPlaceUser updateUser) {
+		System.out.println(updateUser.toString());
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()){
+		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
-			MarketPlaceUser updatedUser = session.get(MarketPlaceUser.class, user.getMpuid());
-			session.merge(user);
-			//MarketPlaceUser u = session.get(MarketPlaceUser.class,  user.getMpuid());
-			tx.commit();
-			if(updatedUser != null) {
-				return updatedUser;
-			} else {
+			MarketPlaceUser user = session.get(MarketPlaceUser.class, updateUser.getMpuid());
+			if(user == null) {
 				return null;
 			}
+			System.out.println(user.toString());
+			updateUser(user, updateUser);
+			System.out.println(user.toString());
+			session.merge(user);
+			// MarketPlaceUser u = session.get(MarketPlaceUser.class, user.getMpuid());
+			tx.commit();
+			if (user != null) 
+				return user;
+			else
+				return null;
 		}
-		
+	}
+
+	private void updateUser(MarketPlaceUser old, MarketPlaceUser update) {
+		if (update.getFirstname() != null)
+			old.setFirstname(update.getFirstname());
+		if (update.getLastname() != null)
+			old.setLastname(update.getLastname());
+		if (update.getPhoneNumber() != null) {
+			old.getPhoneNumber().setAreaCodeThree(update.getPhoneNumber().getAreaCodeThree());
+			old.getPhoneNumber().setBlockFour(update.getPhoneNumber().getBlockFour());
+			old.getPhoneNumber().setBlockThree(update.getPhoneNumber().getBlockThree());
+		}
+		if (update.getAddress() != null) {
+			old.getAddress().setStreetnumber(update.getAddress().getStreetnumber());
+			old.getAddress().setStreetname(update.getAddress().getStreetname());
+			old.getAddress().setCity(update.getAddress().getCity());
+			old.getAddress().setState(update.getAddress().getState());
+			old.getAddress().setZipcode(update.getAddress().getZipcode());
+		}
 	}
 
 	public void messageAlert(MarketPlaceUser receiver) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()){
+		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
 			MarketPlaceUser user = session.get(MarketPlaceUser.class, receiver.getMpuid());
 			user.setNewMessage(true);
 			session.flush();
 			tx.commit();
 		}
-		
+
 	}
-	
+
 	public MarketPlaceUser findBy(int id) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()) {
-			MarketPlaceUser marketPlaceUser = session.find(MarketPlaceUser.class, id);
-		    Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
-		    return marketPlaceUser;
+		try (Session session = sf.openSession()) {
+			MarketPlaceUser marketPlaceUser = session.get(MarketPlaceUser.class, id);
+			// Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
+			return marketPlaceUser;
 		}
 	}
-	
+
 }
