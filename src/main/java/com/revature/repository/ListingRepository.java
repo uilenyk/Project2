@@ -18,6 +18,19 @@ public class ListingRepository {
 	@Autowired
 	private EntityManagerFactory emf;
 
+	public Listing findListingById(int id) {
+		return null;
+	}
+
+	public List<Listing> findAllListings() {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			Query<?> query = session.getNamedQuery("Listing.findAll");
+			List<Listing> listings = (List<Listing>) query.getResultList();
+			return listings;
+		}
+	}
+
 	public Listing create(Listing listing) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
@@ -27,23 +40,10 @@ public class ListingRepository {
 		}
 	}
 
-	public Listing findListingById(int id) {
-		return null;
-	}
-
-	public List<Listing> findMarketPlaceUserListingsById(int id) {
+	public void delete(Listing listing) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
-			return null;
-		}
-	}
-
-	public List<Listing> findAllListings() {
-		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try (Session session = sf.openSession()) {
-			Query<?> query = session.getNamedQuery("findAllListings");
-			List<Listing> listings = (List<Listing>) query.getResultList();
-			return listings;
+			session.delete(listing);
 		}
 	}
 
