@@ -18,6 +18,10 @@ public class ListingService {
 		return repository.findListingById(id);
 	}
 
+	public List<Listing> findMarketPlaceUserListingsById(int id) {
+		return repository.findMarketPlaceUserListingsById(id);
+	}
+
 	public List<Listing> findAllListings() {
 		return repository.findAllListings();
 	}

@@ -2,6 +2,7 @@ package com.revature.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Credential implements Serializable {
 	private String salt;
 
 	// bi-directional one-to-one association to MarketPlaceUser
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpuid")
 	private MarketPlaceUser marketPlaceUser;
 

@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -14,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.Credential;
+import com.revature.models.MarketPlaceUser;
+import com.revature.models.requests.CreateUserRequest;
 
 @Repository
-public class MarketPlaceUserLoginRepository {
+public class UnknownUserRepository {
 
 	@Autowired
 	EntityManagerFactory emf;
@@ -40,6 +43,22 @@ public class MarketPlaceUserLoginRepository {
 			} else {
 				return results.get(0);
 			}
+		}
+	}
+
+	public MarketPlaceUser createUser(Credential cred) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+
+		try (Session session = sf.openSession()) {
+			Transaction tx = session.beginTransaction();
+			session.persist(cred);
+			session.flush();
+			tx.commit();
+			int newUserId = cred.getMarketPlaceUser().getMpuid();
+			if(newUserId != 0)
+				return cred.getMarketPlaceUser();
+			else 
+				return null;
 		}
 	}
 
