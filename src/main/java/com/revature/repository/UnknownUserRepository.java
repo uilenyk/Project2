@@ -25,9 +25,7 @@ public class UnknownUserRepository {
 
 	public Credential auth(String email) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-
 		try (Session session = sf.openSession()) {
-
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<Credential> login = cb.createQuery(Credential.class);
 			Root<Credential> root = login.from(Credential.class);
@@ -47,7 +45,6 @@ public class UnknownUserRepository {
 
 	public MarketPlaceUser createUser(Credential cred) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.persist(cred);

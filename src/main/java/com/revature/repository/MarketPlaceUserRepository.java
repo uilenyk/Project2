@@ -2,9 +2,12 @@ package com.revature.repository;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import org.hibernate.Transaction;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,12 +58,13 @@ public class MarketPlaceUserRepository {
 		
 	}
 	
-//	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
-//		SessionFactory sf = emf.unwrap(SessionFactory.class);
-//		try (Session session = sf.openSession()) {
-//			Query<?> query = session.getNamedQuery("findPasswordByUserCredentials");
-//			query.setParameter("email", loginRequest.getEmail());
-//			return (MarketPlaceUser) query.getSingleResult();
-//		}
-//	}
+	public MarketPlaceUser findBy(int id) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try(Session session = sf.openSession()) {
+			MarketPlaceUser marketPlaceUser = session.find(MarketPlaceUser.class, id);
+		    Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
+		    return marketPlaceUser;
+		}
+	}
+	
 }

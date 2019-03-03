@@ -16,6 +16,10 @@ public class MarketPlaceUserService {
 	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
 		return repository.create(marketPlaceUser);
 	}
+	
+	public MarketPlaceUser findBy(int id) {
+		return repository.findBy(id);
+	}
 
 	public MarketPlaceUser updateUser(MarketPlaceUser user) {
 		System.out.println(user.toString());
@@ -36,4 +40,5 @@ public class MarketPlaceUserService {
 //	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
 //		return repository.findUserByCredentials(loginRequest);
 //	}
+
 }

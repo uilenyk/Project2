@@ -29,8 +29,9 @@ public class HibernateConfig {
 		factoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
 
 		// Set annotated Classes
-		Class[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
+		Class<?>[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
 				PhoneNumber.class, Message.class};
+
 		factoryBean.setAnnotatedClasses(models);
 		factoryBean.setDataSource(getDataSource());
 		return factoryBean;
