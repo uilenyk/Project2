@@ -36,6 +36,8 @@ public class MarketPlaceUser implements Serializable {
 	private String lastname;
 	@Column(length=50)
 	private String pseudoname;
+	
+	private boolean newMessage;
 
 	// bi-directional one-to-one association to Address
 	@OneToOne(cascade=CascadeType.MERGE)
@@ -69,6 +71,47 @@ public class MarketPlaceUser implements Serializable {
 	private List<Message> receivedMessages;
 
 	public MarketPlaceUser() {
+	}
+
+	public MarketPlaceUser(int mpuid, String firstname, String lastname, String pseudoname, boolean newMessage,
+			Address address, CreditCard creditCard, PhoneNumber phoneNumber, List<Listing> marketPlaceUserListings,
+			List<Message> sentMessages, List<Message> receivedMessages) {
+		super();
+		this.mpuid = mpuid;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.pseudoname = pseudoname;
+		this.newMessage = newMessage;
+		this.address = address;
+		this.creditCard = creditCard;
+		this.phoneNumber = phoneNumber;
+		this.marketPlaceUserListings = marketPlaceUserListings;
+		this.sentMessages = sentMessages;
+		this.receivedMessages = receivedMessages;
+	}
+
+	public boolean isNewMessage() {
+		return newMessage;
+	}
+
+	public void setNewMessage(boolean newMessage) {
+		this.newMessage = newMessage;
+	}
+
+	public List<Message> getSentMessages() {
+		return sentMessages;
+	}
+
+	public void setSentMessages(List<Message> sentMessages) {
+		this.sentMessages = sentMessages;
+	}
+
+	public List<Message> getReceivedMessages() {
+		return receivedMessages;
+	}
+
+	public void setReceivedMessages(List<Message> receivedMessages) {
+		this.receivedMessages = receivedMessages;
 	}
 
 	public int getMpuid() {
@@ -149,8 +192,11 @@ public class MarketPlaceUser implements Serializable {
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((marketPlaceUserListings == null) ? 0 : marketPlaceUserListings.hashCode());
 		result = prime * result + mpuid;
+		result = prime * result + (newMessage ? 1231 : 1237);
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + ((pseudoname == null) ? 0 : pseudoname.hashCode());
+		result = prime * result + ((receivedMessages == null) ? 0 : receivedMessages.hashCode());
+		result = prime * result + ((sentMessages == null) ? 0 : sentMessages.hashCode());
 		return result;
 	}
 
@@ -190,6 +236,8 @@ public class MarketPlaceUser implements Serializable {
 			return false;
 		if (mpuid != other.mpuid)
 			return false;
+		if (newMessage != other.newMessage)
+			return false;
 		if (phoneNumber == null) {
 			if (other.phoneNumber != null)
 				return false;
@@ -200,14 +248,25 @@ public class MarketPlaceUser implements Serializable {
 				return false;
 		} else if (!pseudoname.equals(other.pseudoname))
 			return false;
+		if (receivedMessages == null) {
+			if (other.receivedMessages != null)
+				return false;
+		} else if (!receivedMessages.equals(other.receivedMessages))
+			return false;
+		if (sentMessages == null) {
+			if (other.sentMessages != null)
+				return false;
+		} else if (!sentMessages.equals(other.sentMessages))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "MarketPlaceUser [mpuid=" + mpuid + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", pseudoname=" + pseudoname + ", address=" + address + ", creditCard=" + creditCard
-				+ ", phoneNumber=" + phoneNumber + ", marketPlaceUserListings=" + marketPlaceUserListings + "]";
+				+ ", pseudoname=" + pseudoname + ", newMessage=" + newMessage + ", address=" + address + ", creditCard="
+				+ creditCard + ", phoneNumber=" + phoneNumber + ", marketPlaceUserListings=" + marketPlaceUserListings
+				+ ", sentMessages=" + sentMessages + ", receivedMessages=" + receivedMessages + "]";
 	}
 
 }

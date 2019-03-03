@@ -42,6 +42,18 @@ public class MarketPlaceUserRepository {
 		}
 		
 	}
+
+	public void messageAlert(MarketPlaceUser receiver) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try(Session session = sf.openSession()){
+			Transaction tx = session.beginTransaction();
+			MarketPlaceUser user = session.get(MarketPlaceUser.class, receiver.getMpuid());
+			user.setNewMessage(true);
+			session.flush();
+			tx.commit();
+		}
+		
+	}
 	
 //	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
 //		SessionFactory sf = emf.unwrap(SessionFactory.class);

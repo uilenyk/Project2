@@ -28,6 +28,11 @@ public class MarketPlaceUserService {
 		
 	}
 
+	public void messageAlert(MarketPlaceUser receiver) {
+		repository.messageAlert(receiver);
+		
+	}
+
 //	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
 //		return repository.findUserByCredentials(loginRequest);
 //	}
