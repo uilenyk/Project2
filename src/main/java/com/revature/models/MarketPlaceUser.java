@@ -4,17 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "market_place_user")
@@ -26,10 +30,11 @@ public class MarketPlaceUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mpuid;
 
+	@Column(length=50)
 	private String firstname;
-
+	@Column(length=50)
 	private String lastname;
-
+	@Column(length=50)
 	private String pseudoname;
 
 	// bi-directional one-to-one association to Address
@@ -48,9 +53,20 @@ public class MarketPlaceUser implements Serializable {
 	private PhoneNumber phoneNumber;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
-	@OneToMany()
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="mpu_id")
+	@JsonBackReference
 	private List<Listing> marketPlaceUserListings;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="sender_id")
+	@JsonBackReference
+	private List<Message> sentMessages;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="receiver_id")
+	@JsonBackReference
+	private List<Message> receivedMessages;
 
 	public MarketPlaceUser() {
 	}

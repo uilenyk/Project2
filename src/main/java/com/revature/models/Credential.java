@@ -36,7 +36,7 @@ public class Credential implements Serializable {
 	private String salt;
 
 	// bi-directional one-to-one association to MarketPlaceUser
-	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "mpuid")
 	private MarketPlaceUser marketPlaceUser;
 

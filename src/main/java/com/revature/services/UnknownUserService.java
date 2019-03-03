@@ -15,6 +15,7 @@ public class UnknownUserService {
 	UnknownUserRepository repository;
 
 	public MarketPlaceUser auth(LoginRequest loginRequest) {
+		System.out.println(loginRequest);
 		String givenPassword = loginRequest.getPassword();
 		Credential login = repository.auth(loginRequest.getEmail());
 		if (login == null) {

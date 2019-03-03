@@ -15,6 +15,7 @@ import com.revature.models.Credential;
 import com.revature.models.CreditCard;
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
+import com.revature.models.Message;
 import com.revature.models.PhoneNumber;
 
 @Configuration
@@ -29,7 +30,7 @@ public class HibernateConfig {
 
 		// Set annotated Classes
 		Class[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
-				PhoneNumber.class };
+				PhoneNumber.class, Message.class};
 		factoryBean.setAnnotatedClasses(models);
 		factoryBean.setDataSource(getDataSource());
 		return factoryBean;
