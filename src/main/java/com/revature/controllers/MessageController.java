@@ -24,6 +24,11 @@ public class MessageController {
 	@Autowired
 	private MessageService service;
 	
+	/*
+	 * NOTE IN FUTURE, SHOULD ADD FUNCTION FOR GETTING RECEIVER BY PSUDONAME INSTEAD OF THEIR ID
+	 */
+	
+	
 	@PostMapping("/send/{receiver_id}")
 	public ResponseEntity<Message> sendMessage(@RequestBody Message newMessage, @PathVariable("receiver_id") String receiverId) {
 		Message message = service.createMessage(newMessage, Integer.parseInt(receiverId));
@@ -32,6 +37,13 @@ public class MessageController {
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.resolve(500));
 		}
+	}
+	
+	@PostMapping("/{id}/reply/{receiverID}")
+	public ResponseEntity<Message> reply(@PathVariable("id") String id, @PathVariable("receiverID") int userid, @RequestBody Message replyMessage){
+		int parentId = Integer.parseInt(id);
+		Message message = service.reply(replyMessage, parentId, userid);
+		return new ResponseEntity<>(message, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/received/{id}")

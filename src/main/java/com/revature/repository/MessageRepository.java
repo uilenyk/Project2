@@ -14,7 +14,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.revature.models.MarketPlaceUser;
 import com.revature.models.Message;
 
 @Repository
@@ -23,10 +22,14 @@ public class MessageRepository {
 	@Autowired
 	private EntityManagerFactory emf;
 
-	public Message createMessage(Message newMessage) {
+	public Message createMessage(Message newMessage, int parentId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try(Session session = sf.openSession()){
 			Transaction tx = session.beginTransaction();
+			if(parentId != 0) {
+				Message parent = session.get(Message.class, parentId);
+				newMessage.setParent(parent);
+			}
 			session.persist(newMessage);
 			session.flush();
 			tx.commit();
@@ -42,7 +45,6 @@ public class MessageRepository {
 	public List<Message> getMessages(int userId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try(Session session = sf.openSession()){
-			Transaction tx = session.beginTransaction();
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<Message> messages = cb.createQuery(Message.class);
 			Root<Message> root = messages.from(Message.class);
@@ -55,4 +57,5 @@ public class MessageRepository {
 			return results;
 		}
 	}
+
 }

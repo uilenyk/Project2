@@ -27,7 +27,7 @@ public class MessageService {
 		log.debug("the receiver: "+receiver);
 		newMessage.setReceiver(receiver);
 		log.debug("in message service: "+newMessage.toString());
-		Message message = repository.createMessage(newMessage);
+		Message message = repository.createMessage(newMessage, 0);
 		if(message != null) {
 			mpus.messageAlert(newMessage.getReceiver());
 			return message;
@@ -39,5 +39,12 @@ public class MessageService {
 	public List<Message> getMessages(int userId) {
 		List<Message> results = repository.getMessages(userId);
 		return results;
+	}
+
+	public Message reply(Message replyMessage, int parentId, int id) {
+		MarketPlaceUser receiver = mpus.findBy(id);
+		replyMessage.setReceiver(receiver);
+		Message message = repository.createMessage(replyMessage, parentId);
+		return message;
 	}
 }
