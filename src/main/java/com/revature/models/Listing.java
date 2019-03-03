@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedQuery(name = "Listing.findAll", query = "SELECT l FROM Listing l")
@@ -32,11 +33,11 @@ public class Listing implements Serializable {
 
 	private BigDecimal price;
 
-	private byte[] tags;
+	private String tags;
 
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeout;
 
-	// bi-directional many-to-one association to MarketPlaceUserListing
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
 	@JsonBackReference
@@ -97,11 +98,11 @@ public class Listing implements Serializable {
 		this.price = price;
 	}
 
-	public byte[] getTags() {
+	public String getTags() {
 		return this.tags;
 	}
 
-	public void setTags(byte[] tags) {
+	public void setTags(String tags) {
 		this.tags = tags;
 	}
 

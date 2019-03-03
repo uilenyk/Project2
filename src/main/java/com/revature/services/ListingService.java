@@ -14,15 +14,19 @@ public class ListingService {
 	@Autowired
 	private ListingRepository repository;
 
-	public Listing getListingById(int id) {
+	public Listing findListingById(int id) {
 		return repository.findListingById(id);
-	}
-
-	public List<Listing> findMarketPlaceUserListingsById(int id) {
-		return repository.findMarketPlaceUserListingsById(id);
 	}
 
 	public List<Listing> findAllListings() {
 		return repository.findAllListings();
+	}
+
+	public Listing create(Listing listing) {
+		return repository.create(listing);
+	}
+
+	public void delete(Listing listing) {
+		repository.delete(listing);
 	}
 }

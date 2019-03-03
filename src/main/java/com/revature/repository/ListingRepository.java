@@ -18,20 +18,7 @@ public class ListingRepository {
 	@Autowired
 	private EntityManagerFactory emf;
 
-	public Listing create(Listing listing) {
-		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try (Session session = sf.openSession()) {
-			int id = (int) session.save(listing);
-			listing.setListid(id);
-			return listing;
-		}
-	}
-
 	public Listing findListingById(int id) {
-		return null;
-	}
-
-	public List<Listing> findMarketPlaceUserListingsById(int id) {
 		return null;
 	}
 
@@ -41,6 +28,22 @@ public class ListingRepository {
 			Query<?> query = session.getNamedQuery("Listing.findAll");
 			List<Listing> listings = (List<Listing>) query.getResultList();
 			return listings;
+		}
+	}
+
+	public Listing create(Listing listing) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			int id = (int) session.save(listing);
+			listing.setListid(id);
+			return listing;
+		}
+	}
+
+	public void delete(Listing listing) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			session.delete(listing);
 		}
 	}
 
