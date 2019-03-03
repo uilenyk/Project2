@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -32,5 +34,10 @@ public class MessageService {
 		} else {
 			return null;
 		}
+	}
+
+	public List<Message> getMessages(int userId) {
+		List<Message> results = repository.getMessages(userId);
+		return results;
 	}
 }
