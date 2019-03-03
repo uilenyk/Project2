@@ -2,12 +2,11 @@ package com.revature.repository;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import org.hibernate.Transaction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,9 +14,11 @@ import com.revature.models.MarketPlaceUser;
 
 @Repository
 public class MarketPlaceUserRepository {
+	private static Logger log = Logger.getRootLogger();
 
 	@Autowired
 	private EntityManagerFactory emf;
+	
 
 	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
@@ -75,6 +76,7 @@ public class MarketPlaceUserRepository {
 			Transaction tx = session.beginTransaction();
 			MarketPlaceUser user = session.get(MarketPlaceUser.class, receiver.getMpuid());
 			user.setNewMessage(true);
+			session.merge(user);
 			session.flush();
 			tx.commit();
 		}
@@ -82,10 +84,13 @@ public class MarketPlaceUserRepository {
 	}
 
 	public MarketPlaceUser findBy(int id) {
+		log.debug("id in mpu repo: "+id);
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
-			MarketPlaceUser marketPlaceUser = session.get(MarketPlaceUser.class, id);
-			// Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
+			MarketPlaceUser marketPlaceUser = session.load(MarketPlaceUser.class, id);
+			Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
+//			Hibernate.initialize(marketPlaceUser.getSentMessages());
+//			Hibernate.initialize(marketPlaceUser.getReceivedMessages());
 			return marketPlaceUser;
 		}
 	}

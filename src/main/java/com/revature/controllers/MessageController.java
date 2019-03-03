@@ -23,7 +23,7 @@ public class MessageController {
 	
 	@PostMapping("/send/{receiver_id}")
 	public ResponseEntity<Message> sendMessage(@RequestBody Message newMessage, @PathVariable("receiver_id") String receiverId) {
-		Message message = service.createMessage(newMessage);
+		Message message = service.createMessage(newMessage, Integer.parseInt(receiverId));
 		if (message != null) {
 			return new ResponseEntity<>(message, HttpStatus.CREATED);
 		} else {
