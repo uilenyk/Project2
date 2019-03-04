@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.Listing;
+import com.revature.models.requests.ListingPatchRequest;
+import com.revature.models.requests.MakeInactiveRequest;
 import com.revature.repository.ListingRepository;
 
 @Service
@@ -39,12 +41,20 @@ public class ListingService {
 	}
 
 	/*
-	 * Set the listing active and a new timeout
+	 * Set the listing active true and a new timeout
 	 */
 	public Listing update(Listing listing) {
 //		listing.setActive(true);
 //		listing.setTimeout(null);
 		return repository.update(listing);
+	}
+
+	public void patch(ListingPatchRequest request) {
+		repository.patch(request);
+	}
+
+	public void patch(MakeInactiveRequest request) {
+		repository.patch(request);
 	}
 
 	public void delete(int listid) {

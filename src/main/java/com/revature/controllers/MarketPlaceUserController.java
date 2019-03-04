@@ -28,14 +28,14 @@ import com.revature.services.MarketPlaceUserService;
 public class MarketPlaceUserController {
 
 	@Autowired
-	private MarketPlaceUserService service;
+	private MarketPlaceUserService marketPlaceUserService;
 
 	@Autowired
 	private ListingService listingService;
 
 	@GetMapping(path = "/{mpuid}")
 	public @ResponseBody ResponseEntity<MarketPlaceUser> getMarketPlaceUser(@PathVariable("mpuid") String mpuid) {
-		MarketPlaceUser marketPlaceUser = service.findBy(Integer.parseInt(mpuid));
+		MarketPlaceUser marketPlaceUser = marketPlaceUserService.findBy(Integer.parseInt(mpuid));
 		if (marketPlaceUser != null) {
 			return new ResponseEntity<>(marketPlaceUser, HttpStatus.OK);
 		} else {
@@ -46,7 +46,7 @@ public class MarketPlaceUserController {
 	@GetMapping(path = "/{mpuid}/listings")
 	public @ResponseBody ResponseEntity<List<Listing>> getMarketPlaceUserListings(@PathVariable("mpuid") String mpuid,
 			@RequestParam(value = "active", required = false, defaultValue = "true") String active) {
-		MarketPlaceUser marketPlaceUser = service.findBy(Integer.parseInt(mpuid));
+		MarketPlaceUser marketPlaceUser = marketPlaceUserService.findBy(Integer.parseInt(mpuid));
 		if (marketPlaceUser != null) {
 			List<Listing> listings = marketPlaceUser.getMarketPlaceUserListings();
 			List<Listing> results = listingService.filterByActivity(Boolean.valueOf(active), listings);
@@ -59,7 +59,7 @@ public class MarketPlaceUserController {
 	public @ResponseBody ResponseEntity<Listing> getMarketPlaceUserListing(@PathVariable("mpuid") String mpuid,
 			@PathVariable("listid") String listid) {
 		int listId = Integer.parseInt(listid);
-		MarketPlaceUser marketPlaceUser = service.findBy(Integer.parseInt(mpuid));
+		MarketPlaceUser marketPlaceUser = marketPlaceUserService.findBy(Integer.parseInt(mpuid));
 		if (marketPlaceUser != null) {
 			List<Listing> listings = marketPlaceUser.getMarketPlaceUserListings();
 			Predicate<Listing> byListId = (li -> li.getListid() == listId);

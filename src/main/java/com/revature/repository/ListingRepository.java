@@ -3,14 +3,20 @@ package com.revature.repository;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.Listing;
+import com.revature.models.requests.ListingPatchRequest;
+import com.revature.models.requests.MakeInactiveRequest;
 
 @Repository
 public class ListingRepository {
@@ -47,13 +53,54 @@ public class ListingRepository {
 	public Listing update(Listing listing) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
+			Transaction tx = session.beginTransaction();
 			session.update(listing);
-			return session.find(Listing.class, listing.getListid());			
+			Listing updatedListing = session.find(Listing.class, listing.getListid());
+			tx.commit();
+			return updatedListing;
 		}
 	}
 
-	public void delete(int listid) {
+	public void patch(ListingPatchRequest request) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			Transaction tx = session.beginTransaction();
+			CriteriaBuilder cb = emf.getCriteriaBuilder();
+			CriteriaUpdate<Listing> update = cb.createCriteriaUpdate(Listing.class);
+			Root<Listing> root = update.from(Listing.class);
+			update.set("name", request.getName());
+			update.set("description", request.getDescription());
+			update.set("price", request.getPrice());
+			update.set("tags", request.getTags());
+			update.where(cb.equal(root.get("listid"), request.getListid()));
+			session.createQuery(update).executeUpdate();
+			tx.commit();
+		}
+	}
 
+	public void patch(MakeInactiveRequest request) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			Transaction tx = session.beginTransaction();
+			CriteriaBuilder cb = emf.getCriteriaBuilder();
+			CriteriaUpdate<Listing> update = cb.createCriteriaUpdate(Listing.class);
+			Root<Listing> root = update.from(Listing.class);
+			update.set("active", request.getActive());
+			update.where(cb.equal(root.get("listid"), request.getListid()));
+			session.createQuery(update).executeUpdate();
+			tx.commit();
+		}
+
+	}
+
+	public void delete(int listid) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try (Session session = sf.openSession()) {
+			Transaction tx = session.beginTransaction();
+			Listing listing = session.find(Listing.class, listid);
+			session.delete(listing);
+			tx.commit();
+		}
 	}
 
 }
