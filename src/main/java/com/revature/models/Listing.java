@@ -33,6 +33,10 @@ public class Listing implements Serializable {
 
 	private BigDecimal price;
 
+//	@Column(name = "tags", columnDefinition = "text[]")
+//	@Convert(converter = ListToArrayConverter.class)
+//	@Type(type = "string-array")
+//	@Column(name = "tags", columnDefinition = "text[]")
 	private String tags;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
