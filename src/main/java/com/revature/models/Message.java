@@ -37,7 +37,7 @@ public class Message implements Serializable {
 	@JsonBackReference(value="received_messages")
 	private MarketPlaceUser receiver;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="parent_message_id")
 	private Message parent;
 	
