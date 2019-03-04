@@ -17,9 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.type.TrueFalseType;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 @Table(name = "market_place_user")
@@ -31,45 +32,45 @@ public class MarketPlaceUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mpuid;
 
-	@Column(length=50)
+	@Column(length = 50)
 	private String firstname;
-	@Column(length=50)
+	@Column(length = 50)
 	private String lastname;
-	@Column(length=50)
+	@Column(length = 50, nullable = false, unique = true)
 	private String pseudoname;
-	//has the user gotten a new message
-	@Column(name="new_message", columnDefinition="boolean default false")
+	// has the user gotten a new message
+	@Column(name = "new_message", columnDefinition = "boolean default false")
 	private boolean newMessage;
 
 	// bi-directional one-to-one association to Address
-	@OneToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="mpu_address_id")
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "mpu_address_id")
 	private Address address;
 
 	// bi-directional one-to-one association to CreditCard
-	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(name="credit_card_id")
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinColumn(name = "credit_card_id")
 	private CreditCard creditCard;
 
 	// bi-directional one-to-one association to PhoneNumber
-	@OneToOne(cascade=CascadeType.MERGE)
-	@JoinColumn(name="phone_number_id")
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "phone_number_id")
 	private PhoneNumber phoneNumber;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="mpu_id")
+	@JoinColumn(name = "mpu_id")
 	@JsonManagedReference
 	private List<Listing> marketPlaceUserListings;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="sender_id")
-	@JsonManagedReference(value="sent_messages")
+	@JoinColumn(name = "sender_id")
+	@JsonManagedReference(value = "sent_messages")
 	private List<Message> sentMessages;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="receiver_id")
-	@JsonManagedReference(value="received_messages")
+	@JoinColumn(name = "receiver_id")
+	@JsonManagedReference(value = "received_messages")
 	private List<Message> receivedMessages;
 
 	public MarketPlaceUser() {

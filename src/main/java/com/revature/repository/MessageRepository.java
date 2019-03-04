@@ -22,6 +22,12 @@ public class MessageRepository {
 	@Autowired
 	private EntityManagerFactory emf;
 
+	/**
+	 * Creates a new message and add the parent id if it is not the first message of a conversation
+	 * @param newMessage: the message to be added to the database
+	 * @param parentId: the id of the message the newMessage is replying to
+	 * @return: returns the message on success
+	 */
 	public Message createMessage(Message newMessage, int parentId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try(Session session = sf.openSession()){
@@ -42,6 +48,11 @@ public class MessageRepository {
 		}
 	}
 
+	/**
+	 * Gets all the messages the has been sent to the user
+	 * @param userId: mpuid or id of the user on the database
+	 * @return: list of messages
+	 */
 	public List<Message> getMessages(int userId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try(Session session = sf.openSession()){
@@ -51,6 +62,22 @@ public class MessageRepository {
 			
 			messages.select(root)
 				.where(cb.equal(root.get("receiver").<Integer>get("mpuid"), new Integer(userId)));
+			
+			Query<Message> query = session.createQuery(messages);
+			List<Message> results = query.getResultList();
+			return results;
+		}
+	}
+	
+	public List<Message> getSentMessages(int userId) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try(Session session = sf.openSession()){
+			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaQuery<Message> messages = cb.createQuery(Message.class);
+			Root<Message> root = messages.from(Message.class);
+			
+			messages.select(root)
+				.where(cb.equal(root.get("sender").<Integer>get("mpuid"), new Integer(userId)));
 			
 			Query<Message> query = session.createQuery(messages);
 			List<Message> results = query.getResultList();
