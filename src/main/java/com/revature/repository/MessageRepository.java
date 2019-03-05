@@ -7,6 +7,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,6 +20,8 @@ import com.revature.models.Message;
 
 @Repository
 public class MessageRepository {
+	
+	private Logger log = Logger.getRootLogger();
 
 	@Autowired
 	private EntityManagerFactory emf;
@@ -65,6 +69,7 @@ public class MessageRepository {
 			
 			Query<Message> query = session.createQuery(messages);
 			List<Message> results = query.getResultList();
+			log.debug(results.get(0).getReceiver().getPhoneNumber().toString());
 			return results;
 		}
 	}
@@ -81,6 +86,12 @@ public class MessageRepository {
 			
 			Query<Message> query = session.createQuery(messages);
 			List<Message> results = query.getResultList();
+			
+			for(Message m: results) {
+				Hibernate.initialize(m.getReceiver());
+				Hibernate.initialize(m.getSender());
+			}
+			
 			return results;
 		}
 	}

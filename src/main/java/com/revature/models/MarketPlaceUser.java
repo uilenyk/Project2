@@ -17,10 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.type.TrueFalseType;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "market_place_user")
@@ -60,17 +57,17 @@ public class MarketPlaceUser implements Serializable {
 	// bi-directional many-to-one association to MarketPlaceUserListing
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
-	@JsonManagedReference
+	@JsonBackReference
 	private List<Listing> marketPlaceUserListings;
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sender_id")
-	@JsonManagedReference(value = "sent_messages")
+	@JsonBackReference(value = "sent_messages")
 	private List<Message> sentMessages;
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "receiver_id")
-	@JsonManagedReference(value = "received_messages")
+	@JsonBackReference(value = "received_messages")
 	private List<Message> receivedMessages;
 
 	public MarketPlaceUser() {

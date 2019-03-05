@@ -45,6 +45,11 @@ public class MarketPlaceUserService {
 		
 	}
 
+	public MarketPlaceUser findByPsudoname(String userName) {
+		MarketPlaceUser user = repository.findByPsudoname(userName);
+		return user;
+	}
+
 //	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
 //		return repository.findUserByCredentials(loginRequest);
 //	}

@@ -16,8 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name="message")
 public class Message implements Serializable {
@@ -27,14 +25,14 @@ public class Message implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="sender_id")
-	@JsonBackReference(value="sent_messages")
+	//@JsonManagedReference(value="sent_messages")
 	private MarketPlaceUser sender;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="receiver_id")
-	@JsonBackReference(value="received_messages")
+	//@JsonManagedReference(value="received_messages")
 	private MarketPlaceUser receiver;
 	
 	@OneToOne(fetch = FetchType.EAGER)

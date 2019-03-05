@@ -1,16 +1,23 @@
 package com.revature.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.MarketPlaceUser;
+import com.revature.models.Message;
 
 @Repository
 public class MarketPlaceUserRepository {
@@ -93,6 +100,24 @@ public class MarketPlaceUserRepository {
 //			Hibernate.initialize(marketPlaceUser.getReceivedMessages());
 			return marketPlaceUser;
 		}
+	}
+
+	public MarketPlaceUser findByPsudoname(String userName) {
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try(Session session = sf.openSession()){
+			CriteriaBuilder cb = session.getCriteriaBuilder();
+			CriteriaQuery<MarketPlaceUser> user = cb.createQuery(MarketPlaceUser.class);
+			Root<MarketPlaceUser> root = user.from(MarketPlaceUser.class);
+			
+			user.select(root)
+				.where(cb.equal(root.get("pseudoname"), userName));
+			
+			Query<MarketPlaceUser> query = session.createQuery(user);
+			List<MarketPlaceUser> results = query.getResultList();
+			if(results != null && !results.isEmpty())
+				return results.get(0);
+		}
+		return null;
 	}
 
 }
