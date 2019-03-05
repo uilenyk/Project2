@@ -3,6 +3,8 @@ package com.revature.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,15 +12,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.Positive;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.revature.abstraction.Timewatch;
 
 @Entity
+@Table(name = "Listing")
 @NamedQuery(name = "Listing.findAll", query = "SELECT l FROM Listing l")
-public class Listing implements Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "listid")
+public class Listing implements Timewatch, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,21 +45,45 @@ public class Listing implements Serializable {
 
 	private String name;
 
+	@Positive
 	private BigDecimal price;
 
-//	@Column(name = "tags", columnDefinition = "text[]")
-//	@Convert(converter = ListToArrayConverter.class)
-//	@Type(type = "string-array")
-//	@Column(name = "tags", columnDefinition = "text[]")
-	private String tags;
+	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Tag.class)
+	@JoinTable(name = "listing_tag", joinColumns = @JoinColumn(name = "listid"), inverseJoinColumns = @JoinColumn(name = "tagid"))
+	@Fetch(FetchMode.SUBSELECT)
+//	@JsonManagedReference(value="tags")
+	private List<Tag> tags;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Timestamp timeout;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
-	@JsonBackReference
+//	@JsonManagedReference(value = "owner")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MarketPlaceUser owner;
+
+	public Listing() {
+	}
+
+	@Override
+	public void setLife(int days, boolean active) {
+		LocalDateTime nowPlusDays = LocalDateTime.now().plusDays(days);
+		Timestamp timeout = Timestamp.valueOf(nowPlusDays);
+		this.setTimeout(timeout);
+		this.setActive(active);
+	}
+
+	@Override
+	public void resetLife(LocalDateTime targetDateTime) {
+		LocalDateTime timeoutDate = this.timeout.toLocalDateTime();
+		int timeoutDay = timeoutDate.getDayOfMonth();
+		int targetDay = targetDateTime.getDayOfMonth();
+		int timeDiff = (timeoutDay - targetDay);
+		if (timeDiff < 7) {
+			this.setLife(10, true);
+		}
+	}
 
 	public MarketPlaceUser getOwner() {
 		return owner;
@@ -53,13 +91,6 @@ public class Listing implements Serializable {
 
 	public void setOwner(MarketPlaceUser owner) {
 		this.owner = owner;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Listing() {
 	}
 
 	public Integer getListid() {
@@ -102,11 +133,11 @@ public class Listing implements Serializable {
 		this.price = price;
 	}
 
-	public String getTags() {
+	public List<Tag> getTags() {
 		return this.tags;
 	}
 
-	public void setTags(String tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 
@@ -116,6 +147,12 @@ public class Listing implements Serializable {
 
 	public void setTimeout(Timestamp timeout) {
 		this.timeout = timeout;
+	}
+
+	@Override
+	public String toString() {
+		return "Listing [listid=" + listid + ", active=" + active + ", description=" + description + ", name=" + name
+				+ ", price=" + price + ", tags=" + tags + ", timeout=" + timeout + ", owner=" + owner + "]";
 	}
 
 }

@@ -34,7 +34,10 @@ public class ListingController {
 	public @ResponseBody ResponseEntity<List<Listing>> getAllListings(
 			@RequestParam(value = "active", required = false, defaultValue = "true") String active) {
 		List<Listing> listings = listingService.findAll(Boolean.valueOf(active));
-		return new ResponseEntity<>(listings, HttpStatus.OK);
+		if (listings != null) {
+			return new ResponseEntity<>(listings, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(listings, HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping(path = "/{listid}")
@@ -48,7 +51,8 @@ public class ListingController {
 
 	@PostMapping(path = "")
 	public @ResponseBody ResponseEntity<Listing> addListing(@RequestBody Listing listing) {
-		if (listingService.create(listing) != null) {
+		Listing createdListing = listingService.create(listing);
+		if (createdListing != null) {
 			return new ResponseEntity<>(listing, HttpStatus.CREATED);
 		}
 		return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
@@ -56,9 +60,9 @@ public class ListingController {
 
 	@PatchMapping(path = "/{listid}")
 	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") String listid,
-			@RequestBody ListingPatchRequest listingPatchRequest) {
-		listingPatchRequest.setListid(Integer.parseInt(listid));
-		listingService.patch(listingPatchRequest);
+			@RequestBody ListingPatchRequest request) {
+		request.setListid(Integer.parseInt(listid));
+		listingService.patch(request);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
 

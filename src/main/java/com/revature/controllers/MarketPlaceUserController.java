@@ -48,7 +48,7 @@ public class MarketPlaceUserController {
 			@RequestParam(value = "active", required = false, defaultValue = "true") String active) {
 		MarketPlaceUser marketPlaceUser = marketPlaceUserService.findBy(Integer.parseInt(mpuid));
 		if (marketPlaceUser != null) {
-			List<Listing> listings = marketPlaceUser.getMarketPlaceUserListings();
+			List<Listing> listings = marketPlaceUser.getListings();
 			List<Listing> results = listingService.filterByActivity(Boolean.valueOf(active), listings);
 			return new ResponseEntity<>(results, HttpStatus.OK);
 		}
@@ -61,7 +61,7 @@ public class MarketPlaceUserController {
 		int listId = Integer.parseInt(listid);
 		MarketPlaceUser marketPlaceUser = marketPlaceUserService.findBy(Integer.parseInt(mpuid));
 		if (marketPlaceUser != null) {
-			List<Listing> listings = marketPlaceUser.getMarketPlaceUserListings();
+			List<Listing> listings = marketPlaceUser.getListings();
 			Predicate<Listing> byListId = (li -> li.getListid() == listId);
 			List<Listing> results = listings.stream().filter(byListId).collect(Collectors.<Listing>toList());
 			return new ResponseEntity<>(results.get(0), HttpStatus.OK);

@@ -3,11 +3,11 @@
 //import java.sql.SQLException;
 //import java.util.ArrayList;
 //import java.util.List;
-//import org.postgresql.jdbc4.Jdbc4Array;
-//
 //
 //import javax.persistence.AttributeConverter;
 //import javax.persistence.Converter;
+//
+//import org.postgresql.jdbc4.Jdbc4Array;
 //
 //@Converter(autoApply = true)
 //public class ListToArrayConverter implements AttributeConverter<List<String>, Object> {

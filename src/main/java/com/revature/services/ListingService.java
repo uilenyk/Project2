@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -16,6 +17,9 @@ import com.revature.repository.ListingRepository;
 public class ListingService {
 
 	@Autowired
+	private TagService tagService;
+
+	@Autowired
 	private ListingRepository repository;
 
 	public Listing findBy(int id) {
@@ -30,22 +34,14 @@ public class ListingService {
 		return filterByActivity(active, repository.findAll());
 	}
 
-	/*
-	 * Set the listing active true and some timeout
-	 * 
-	 */
 	public Listing create(Listing listing) {
-//		listing.setActive(true);
-//		listing.setTimeout(null);
+		listing.setLife(30, true);
+		System.out.println("Tags: " + listing.getTags());
 		return repository.create(listing);
 	}
 
-	/*
-	 * Set the listing active true and a new timeout
-	 */
 	public Listing update(Listing listing) {
-//		listing.setActive(true);
-//		listing.setTimeout(null);
+		listing.resetLife(LocalDateTime.now());
 		return repository.update(listing);
 	}
 
@@ -65,4 +61,5 @@ public class ListingService {
 		Predicate<Listing> byActivity = li -> li.getActive() == active;
 		return targetList.stream().filter(byActivity).collect(Collectors.<Listing>toList());
 	}
+
 }

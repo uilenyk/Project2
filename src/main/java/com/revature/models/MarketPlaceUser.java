@@ -23,11 +23,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "market_place_user")
 @NamedQueries({ @NamedQuery(name = "MarketPlaceUser.findAll", query = "SELECT m FROM MarketPlaceUser m") })
 public class MarketPlaceUser implements Serializable {
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,31 +31,29 @@ public class MarketPlaceUser implements Serializable {
 
 	@Column(length = 50)
 	private String firstname;
+
 	@Column(length = 50)
 	private String lastname;
+
 	@Column(length = 50)
 	private String pseudoname;
 
-	// bi-directional one-to-one association to Address
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "mpu_address_id")
 	private Address address;
 
-	// bi-directional one-to-one association to CreditCard
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "credit_card_id")
 	private CreditCard creditCard;
 
-	// bi-directional one-to-one association to PhoneNumber
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "phone_number_id")
 	private PhoneNumber phoneNumber;
 
-	// bi-directional many-to-one association to MarketPlaceUserListing
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "mpu_id")
-	@JsonBackReference(value = "mpu_id_listing")
-	private List<Listing> marketPlaceUserListings;
+	@JsonBackReference(value = "listings")
+	private List<Listing> listings;
 
 	public MarketPlaceUser() {
 	}
@@ -121,19 +114,19 @@ public class MarketPlaceUser implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Listing> getMarketPlaceUserListings() {
-		return marketPlaceUserListings;
+	public List<Listing> getListings() {
+		return listings;
 	}
 
-	public void setMarketPlaceUserListings(List<Listing> marketPlaceUserListings) {
-		this.marketPlaceUserListings = marketPlaceUserListings;
+	public void setListings(List<Listing> listings) {
+		this.listings = listings;
 	}
 
 	@Override
 	public String toString() {
 		return "MarketPlaceUser [mpuid=" + mpuid + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", pseudoname=" + pseudoname + ", address=" + address + ", creditCard=" + creditCard
-				+ ", phoneNumber=" + phoneNumber + ", marketPlaceUserListings=" + marketPlaceUserListings + "]";
+				+ ", phoneNumber=" + phoneNumber + ", listings=" + listings + "]";
 	}
 
 }

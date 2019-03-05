@@ -1,6 +1,9 @@
 package com.revature.models.requests;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.revature.models.Tag;
 
 public class ListingPatchRequest {
 
@@ -9,10 +12,11 @@ public class ListingPatchRequest {
 	private String name;
 	private String description;
 	private BigDecimal price;
-	private String tags;
+	private List<Tag> tags;
 
 	public ListingPatchRequest(Integer listid, Boolean active, String name, String description, BigDecimal price,
-			String tags) {
+			List<Tag> tags) {
+		super();
 		this.listid = listid;
 		this.active = active;
 		this.name = name;
@@ -61,11 +65,11 @@ public class ListingPatchRequest {
 		this.price = price;
 	}
 
-	public String getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(String tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 
