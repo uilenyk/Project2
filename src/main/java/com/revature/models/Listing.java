@@ -16,12 +16,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -54,7 +56,7 @@ public class Listing implements Timewatch, Serializable {
 //	@JsonManagedReference(value="tags")
 	private List<Tag> tags;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Timestamp timeout;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -62,6 +64,11 @@ public class Listing implements Timewatch, Serializable {
 //	@JsonManagedReference(value = "owner")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MarketPlaceUser owner;
+	
+	@OneToMany
+	@JoinColumn(name = "listing_id")
+	@JsonBackReference(value = "images")
+	private List<Images> images;
 
 	public Listing() {
 	}
