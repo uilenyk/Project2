@@ -3,6 +3,7 @@ package com.revature.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -34,13 +37,18 @@ public class Listing implements Serializable {
 
 	private String tags;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Timestamp timeout;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
 	//@JsonManagedReference
 	private MarketPlaceUser owner;
+	
+	@OneToMany
+	@JoinColumn(name = "listing_id")
+	@JsonBackReference(value = "images")
+	private List<Images> images;
 
 	public MarketPlaceUser getOwner() {
 		return owner;
