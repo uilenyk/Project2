@@ -65,10 +65,10 @@ public class Listing implements Timewatch, Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MarketPlaceUser owner;
 	
-	@OneToMany
-	@JoinColumn(name = "listing_id")
-	@JsonBackReference(value = "images")
-	private List<Images> images;
+//	@OneToMany
+//	@JoinColumn(name = "listing_id")
+//	@JsonBackReference(value = "images")
+//	private List<Images> images;
 
 	public Listing() {
 	}
