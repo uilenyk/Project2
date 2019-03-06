@@ -45,10 +45,10 @@ public class Listing implements Serializable {
 	//@JsonManagedReference
 	private MarketPlaceUser owner;
 	
-	@OneToMany
-	@JoinColumn(name = "listing_id")
-	@JsonBackReference(value = "images")
-	private List<Images> images;
+//	@OneToMany
+//	@JoinColumn(name = "listing_id")
+//	@JsonBackReference(value = "images")
+//	private List<Images> images;
 
 	public MarketPlaceUser getOwner() {
 		return owner;

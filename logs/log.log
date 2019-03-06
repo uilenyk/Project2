@@ -66,3 +66,6 @@
 2019-03-04 21:19:50 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
 2019-03-04 21:21:10 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
 2019-03-04 21:21:10 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 22:20:09 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
+2019-03-05 22:20:09 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@10221b4e
+2019-03-05 22:20:09 DEBUG MarketPlaceUserRepository:94 - id in mpu repo: 1000
