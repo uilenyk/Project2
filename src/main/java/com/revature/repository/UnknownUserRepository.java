@@ -7,16 +7,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.Credential;
 import com.revature.models.MarketPlaceUser;
-import com.revature.models.requests.CreateUserRequest;
 
 @Repository
 public class UnknownUserRepository {
@@ -26,9 +25,7 @@ public class UnknownUserRepository {
 
 	public Credential auth(String email) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-
 		try (Session session = sf.openSession()) {
-
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<Credential> login = cb.createQuery(Credential.class);
 			Root<Credential> root = login.from(Credential.class);
@@ -48,7 +45,6 @@ public class UnknownUserRepository {
 
 	public MarketPlaceUser createUser(Credential cred) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.persist(cred);
