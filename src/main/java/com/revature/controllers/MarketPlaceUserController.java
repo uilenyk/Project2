@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
-import com.revature.services.ListingService;
 import com.revature.services.MarketPlaceUserService;
 
 @RestController
@@ -69,10 +68,10 @@ public class MarketPlaceUserController {
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
-	@PutMapping("/personal/update")
+	@PutMapping(path="/personal/update")
 	public @ResponseBody ResponseEntity<?> updateUser(@RequestBody MarketPlaceUser user) {
 		System.out.println(user.toString());
-		MarketPlaceUser updatedUser = marketPlaceUserService.updateUser(user);
+		MarketPlaceUser updatedUser = service.updateUser(user);
 		if (updatedUser != null) {
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 		} else {

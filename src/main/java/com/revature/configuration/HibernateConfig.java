@@ -6,10 +6,14 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.revature.models.Address;
 import com.revature.models.Credential;
 import com.revature.models.CreditCard;
@@ -33,7 +37,7 @@ public class HibernateConfig {
 				PhoneNumber.class, Tag.class};
 
 		factoryBean.setAnnotatedClasses(models);
-		factoryBean.setDataSource(getDataSource2());
+		factoryBean.setDataSource(getDataSource());
 		return factoryBean;
 	}
 
@@ -48,16 +52,16 @@ public class HibernateConfig {
 		return dataSource;
 	}
 
-	@Bean(name = "dataSource2")
-	public DataSource getDataSource2() {
-		System.out.println("Configuring data source 2");
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl(System.getenv("PROJECT2_TEST_URL"));
-		dataSource.setUsername(System.getenv("PROJECT2_TEST_USER"));
-		dataSource.setPassword(System.getenv("PROJECT2_TEST_PASS"));
-		return dataSource;
-	}
+//	@Bean(name = "dataSource2")
+//	public DataSource getDataSource2() {
+//		System.out.println("Configuring data source 2");
+//		BasicDataSource dataSource = new BasicDataSource();
+//		dataSource.setDriverClassName("org.postgresql.Driver");
+//		dataSource.setUrl(System.getenv("PROJECT2_TEST_URL"));
+//		dataSource.setUsername(System.getenv("PROJECT2_TEST_USER"));
+//		dataSource.setPassword(System.getenv("PROJECT2_TEST_PASS"));
+//		return dataSource;
+//	}
 
 	@Bean
 	public HibernateTransactionManager getTransactionManager() {
@@ -67,4 +71,14 @@ public class HibernateConfig {
 		return transactionManager;
 	}
 
+	 @Bean
+	 public MappingJackson2HttpMessageConverter Jackson2HttpMessageConverter() {
+	  MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+	  ObjectMapper objectMapper = new ObjectMapper();
+	  objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	  objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+	  jsonConverter.setObjectMapper(objectMapper);
+	  return jsonConverter;
+	 }
+	 
 }

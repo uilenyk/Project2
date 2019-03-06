@@ -54,14 +54,20 @@ public class Listing implements Timewatch, Serializable {
 //	@JsonManagedReference(value="tags")
 	private List<Tag> tags;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Timestamp timeout;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
-//	@JsonManagedReference(value = "owner")
+
+	// @JsonManagedReference(value = "owner")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MarketPlaceUser owner;
+
+//	@OneToMany
+//	@JoinColumn(name = "listing_id")
+//	@JsonBackReference(value = "images")
+//	private List<Images> images;
 
 	public Listing() {
 	}
