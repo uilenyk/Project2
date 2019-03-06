@@ -72,3 +72,23 @@
 2019-03-05 22:47:28 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
 2019-03-05 22:47:28 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@7b6cc070
 2019-03-05 22:47:28 DEBUG MarketPlaceUserRepository:94 - id in mpu repo: 1000
+2019-03-05 23:14:53 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
+2019-03-05 23:14:53 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@114a06b6
+2019-03-05 23:14:53 DEBUG MarketPlaceUserRepository:94 - id in mpu repo: 1000
+2019-03-05 23:15:25 DEBUG MessageService:32 - receiver psudoname: 2000
+2019-03-05 23:16:46 DEBUG MessageService:32 - receiver psudoname: PseudoKyneLiu
+2019-03-05 23:16:46 DEBUG MessageService:42 - in message service: Message [id=0, sender=MarketPlaceUser [mpuid=1000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], receiver=MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=com.revature.models.Address@75c2ae, creditCard=com.revature.models.CreditCard@35bfc84f, phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], parent=null, subject=test reply message 3, content=Testing reply functionality. Makes sure no proxy error for parent of parent and no inifite loop to get all. This is the contents of the message, created=null]
+2019-03-05 23:27:05 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 23:27:05 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 23:29:48 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 23:29:48 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 23:30:03 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:30:03 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:30:53 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:30:53 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:31:22 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 23:31:22 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
+2019-03-05 23:31:37 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:31:37 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:31:51 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-05 23:31:51 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]

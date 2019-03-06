@@ -12,16 +12,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "credential")
 @NamedQuery(name = "Credential.findAll", query = "SELECT c FROM Credential c")
 public class Credential implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	@Email
+	@NotNull
+	private String email;
+
+	@NotNull
+	private String password;
+
+	private String salt;
+
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinColumn(name = "mpuid")
+	private MarketPlaceUser marketPlaceUser;
+
+	public Credential(String email, String password, String salt, MarketPlaceUser marketPlaceUser) {
+		this.email = email;
+		this.password = password;
+		this.salt = salt;
+		this.marketPlaceUser = marketPlaceUser;
+	}
+
+	public Credential() {
+	}
 
 	public int getId() {
 		return id;
@@ -31,32 +56,40 @@ public class Credential implements Serializable {
 		this.id = id;
 	}
 
-	private String email;
+	public String getEmail() {
+		return email;
+	}
 
-	private String password;
-
-	private String salt;
-
-	// bi-directional one-to-one association to MarketPlaceUser
-	@OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(name = "mpuid")
-	private MarketPlaceUser marketPlaceUser;
-
-	public Credential(String email, String password, String salt, MarketPlaceUser marketPlaceUser) {
-		super();
+	public void setEmail(String email) {
 		this.email = email;
-		this.password = password;
-		this.salt = salt;
-		this.marketPlaceUser = marketPlaceUser;
 	}
 
 	public String getSalt() {
 		return this.salt;
 	}
 
-	public Credential() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public MarketPlaceUser getMarketPlaceUser() {
+		return this.marketPlaceUser;
+	}
+
+	public void setMarketPlaceUser(MarketPlaceUser marketPlaceUser) {
+		this.marketPlaceUser = marketPlaceUser;
 	}
 
 	@Override
@@ -102,43 +135,10 @@ public class Credential implements Serializable {
 		return true;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-
-	public MarketPlaceUser getMarketPlaceUser() {
-		return this.marketPlaceUser;
-	}
-
-	public void setMarketPlaceUser(MarketPlaceUser marketPlaceUser) {
-		this.marketPlaceUser = marketPlaceUser;
-	}
-
 	@Override
 	public String toString() {
 		return "Credential [id=" + id + ", email=" + email + ", password=" + password + ", salt=" + salt
 				+ ", marketPlaceUser=" + marketPlaceUser + "]";
 	}
 
-	
 }

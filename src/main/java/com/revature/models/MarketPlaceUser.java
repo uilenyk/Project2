@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -29,12 +30,18 @@ public class MarketPlaceUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mpuid;
 
+	@NotNull
 	@Column(length = 50)
 	private String firstname;
+
+	@NotNull
 	@Column(length = 50)
 	private String lastname;
-	@Column(length = 50, nullable = false, unique = true)
+
+	@NotNull
+	@Column(length = 50, unique = true)
 	private String pseudoname;
+
 	// has the user gotten a new message
 	@Column(name = "new_message", columnDefinition = "boolean default false")
 	private boolean newMessage;
@@ -53,6 +60,11 @@ public class MarketPlaceUser implements Serializable {
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "phone_number_id")
 	private PhoneNumber phoneNumber;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "mpu_id")
+	@JsonBackReference(value = "listings")
+	private List<Listing> listings;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
 	@OneToMany(fetch = FetchType.LAZY)
@@ -115,7 +127,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public int getMpuid() {
-		return this.mpuid;
+		return mpuid;
 	}
 
 	public void setMpuid(int mpuid) {
@@ -123,7 +135,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public String getFirstname() {
-		return this.firstname;
+		return firstname;
 	}
 
 	public void setFirstname(String firstname) {
@@ -131,7 +143,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public String getLastname() {
-		return this.lastname;
+		return lastname;
 	}
 
 	public void setLastname(String lastname) {
@@ -139,7 +151,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public String getPseudoname() {
-		return this.pseudoname;
+		return pseudoname;
 	}
 
 	public void setPseudoname(String pseudoname) {
@@ -147,7 +159,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public Address getAddress() {
-		return this.address;
+		return address;
 	}
 
 	public void setAddress(Address address) {
@@ -155,7 +167,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public CreditCard getCreditCard() {
-		return this.creditCard;
+		return creditCard;
 	}
 
 	public void setCreditCard(CreditCard creditCard) {
@@ -163,23 +175,19 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public PhoneNumber getPhoneNumber() {
-		return this.phoneNumber;
-	}
-
-	public void setPhoneNumbers(PhoneNumber phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public List<Listing> getMarketPlaceUserListings() {
-		return marketPlaceUserListings;
-	}
-
-	public void setMarketPlaceUserListings(List<Listing> marketPlaceUserListings) {
-		this.marketPlaceUserListings = marketPlaceUserListings;
+		return phoneNumber;
 	}
 
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public List<Listing> getListings() {
+		return listings;
+	}
+
+	public void setListings(List<Listing> listings) {
+		this.listings = listings;
 	}
 
 	@Override

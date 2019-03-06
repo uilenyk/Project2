@@ -23,6 +23,8 @@ import com.revature.models.MarketPlaceUser;
 import com.revature.models.Message;
 import com.revature.models.PhoneNumber;
 
+import io.micrometer.core.instrument.Tags;
+	
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
@@ -35,7 +37,8 @@ public class HibernateConfig {
 
 		// Set annotated Classes
 		Class<?>[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
-				PhoneNumber.class, Message.class, Images.class};
+				PhoneNumber.class, Message.class, Images.class, Tags.class};
+
 
 		factoryBean.setAnnotatedClasses(models);
 		factoryBean.setDataSource(getDataSource());
@@ -52,6 +55,17 @@ public class HibernateConfig {
 		dataSource.setPassword(System.getenv("PROJECT2_PASS"));
 		return dataSource;
 	}
+
+//	@Bean(name = "dataSource2")
+//	public DataSource getDataSource2() {
+//		System.out.println("Configuring data source 2");
+//		BasicDataSource dataSource = new BasicDataSource();
+//		dataSource.setDriverClassName("org.postgresql.Driver");
+//		dataSource.setUrl(System.getenv("PROJECT2_TEST_URL"));
+//		dataSource.setUsername(System.getenv("PROJECT2_TEST_USER"));
+//		dataSource.setPassword(System.getenv("PROJECT2_TEST_PASS"));
+//		return dataSource;
+//	}
 
 	@Bean
 	public HibernateTransactionManager getTransactionManager() {

@@ -35,7 +35,7 @@ public class MessageService {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 		//don't need the listings or messages of the user. this is to avoid the lazy init exception
-		receiver.setMarketPlaceUserListings(null);
+		receiver.setListings(null);
 		receiver.setSentMessages(null);
 		receiver.setReceivedMessages(null);
 		newMessage.setReceiver(receiver);
