@@ -16,8 +16,11 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.revature.models.CreditCard;
 import com.revature.models.Images;
 import com.revature.models.Listing;
+import com.revature.models.MarketPlaceUser;
+import com.revature.models.reponse.BuyerReceipt;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
 
@@ -136,6 +139,43 @@ public class ListingRepository {
 			Listing listing = session.find(Listing.class, listid);
 			session.delete(listing);
 			tx.commit();
+		}
+	}
+
+	public BuyerReceipt buyListing(Listing listing, MarketPlaceUser buyer, MarketPlaceUser seller) {
+		BuyerReceipt result = new BuyerReceipt();
+		SessionFactory sf = emf.unwrap(SessionFactory.class);
+		try(Session session = sf.openSession()){
+			Transaction tx = session.beginTransaction();
+			log.debug(listing.getListid());
+			boolean l;
+			if((l = session.get(Listing.class, listing.getListid()).getActive()) == false) {
+				log.debug(l);
+				return null;
+			}
+			
+			//MarketPlaceUser seller = listing.getOwner();
+			CreditCard buyerCredit = buyer.getCreditCard();
+			CreditCard ownerCredit = seller.getCreditCard();
+			listing.setActive(false);
+			
+			session.merge(buyerCredit);
+			log.debug(buyerCredit);
+			session.merge(ownerCredit);
+			log.debug(seller);
+			//session.merge(ownerCredit);
+			session.merge(listing);
+			log.debug("after merge seller");
+			result.setBuyerName(buyer.getPseudoname());
+			log.debug("after set buyer name to result");
+			result.setSellerName(listing.getOwner().getPseudoname());
+			log.debug("after set seller name to result");
+			result.setBoughtItem(listing);
+			log.debug("after set listing to result");
+			session.flush();
+			tx.commit();
+			log.debug(result);
+			return result;
 		}
 	}
 

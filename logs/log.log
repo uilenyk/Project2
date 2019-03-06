@@ -5,3 +5,10 @@
 2019-03-06 10:19:18 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
 2019-03-06 13:38:54 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
 2019-03-06 13:46:38 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
+2019-03-06 14:17:08 DEBUG ListingRepository:75 - Listing [listid=4, active=true, description=Laptop for sale by Thomas, name=Listing for laptop, price=1000, tags=[Tag [tagid=6600, tagName=electronics, listings=null]], timeout=2019-04-05 14:17:08.131, owner=MarketPlaceUser [mpuid=2000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]]
+2019-03-06 15:48:13 DEBUG ListingRepository:149 - 4
+2019-03-06 15:49:32 DEBUG ListingRepository:149 - 4
+2019-03-06 15:55:40 DEBUG ListingRepository:150 - 4
+2019-03-06 15:58:19 DEBUG ListingRepository:150 - 3
+2019-03-06 16:04:08 DEBUG ListingRepository:150 - 3
+2019-03-06 16:04:08 DEBUG ListingRepository:160 - CreditCard [id=0, balance=26000]

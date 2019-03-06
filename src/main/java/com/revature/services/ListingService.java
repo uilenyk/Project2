@@ -1,23 +1,31 @@
 package com.revature.services;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.models.CreditCard;
 import com.revature.models.Listing;
+import com.revature.models.MarketPlaceUser;
+import com.revature.models.reponse.BuyerReceipt;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
 import com.revature.repository.ListingRepository;
 
 @Service
 public class ListingService {
+	private Logger log = Logger.getRootLogger();
 
 //	@Autowired
 //	private TagService tagService;
+	@Autowired 
+	private MarketPlaceUserService mpus;
 
 	@Autowired
 	private ListingRepository repository;
@@ -60,6 +68,28 @@ public class ListingService {
 	public List<Listing> filterByActivity(boolean active, List<Listing> targetList) {
 		Predicate<Listing> byActivity = li -> li.getActive() == active;
 		return targetList.stream().filter(byActivity).collect(Collectors.<Listing>toList());
+	}
+
+	public BuyerReceipt buyListing(Listing listing, int buyerId) throws Exception {
+		if(listing.getOwner().getMpuid() == buyerId) {
+			throw new SQLException("Cannot sell to yourself!");
+		}
+		MarketPlaceUser buyer = mpus.findBy(buyerId);
+		if(buyer.getCreditCard().getBalance().compareTo(listing.getPrice()) < 0) {
+			return null;
+		}
+		MarketPlaceUser seller = mpus.findBy(listing.getOwner().getMpuid());
+		//listing.setOwner(seller);
+		CreditCard buyerCredit = buyer.getCreditCard();
+		CreditCard ownerCredit = seller.getCreditCard();
+		buyerCredit.setBalance(buyerCredit.getBalance().subtract(listing.getPrice()));
+		ownerCredit.setBalance(ownerCredit.getBalance().add(listing.getPrice()));
+		BuyerReceipt receipt = repository.buyListing(listing, buyer, seller);
+		log.debug(receipt);
+		if(receipt == null) {
+			throw new Exception("Listing no longer available");
+		}
+		return receipt;
 	}
 
 }

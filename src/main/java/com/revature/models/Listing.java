@@ -39,7 +39,7 @@ public class Listing implements Timewatch, Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer listid;
+	private int listid;
 
 	private Boolean active;
 
@@ -90,6 +90,10 @@ public class Listing implements Timewatch, Serializable {
 		if (timeDiff < 7) {
 			this.setLife(10, true);
 		}
+	}
+
+	public void setListid(int listid) {
+		this.listid = listid;
 	}
 
 	public List<Images> getImages() {
