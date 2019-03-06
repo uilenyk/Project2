@@ -17,13 +17,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.revature.models.Address;
 import com.revature.models.Credential;
 import com.revature.models.CreditCard;
-import com.revature.models.Images;
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
 import com.revature.models.Message;
 import com.revature.models.PhoneNumber;
-
-import io.micrometer.core.instrument.Tags;
+import com.revature.models.Tag;
 	
 @Configuration
 @EnableTransactionManagement
@@ -37,8 +35,7 @@ public class HibernateConfig {
 
 		// Set annotated Classes
 		Class<?>[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
-				PhoneNumber.class, Message.class, Images.class, Tags.class};
-
+				PhoneNumber.class, Message.class, Tag.class};
 
 		factoryBean.setAnnotatedClasses(models);
 		factoryBean.setDataSource(getDataSource());

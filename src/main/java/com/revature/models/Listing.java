@@ -16,21 +16,20 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.revature.abstraction.Timewatch;
 
 @Entity
-@Table(name = "listing")
+@Table(name = "Listing")
 @NamedQuery(name = "Listing.findAll", query = "SELECT l FROM Listing l")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "listid")
 public class Listing implements Timewatch, Serializable {
@@ -38,7 +37,7 @@ public class Listing implements Timewatch, Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int listid;
+	private Integer listid;
 
 	private Boolean active;
 
@@ -60,17 +59,10 @@ public class Listing implements Timewatch, Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
-	// @JsonManagedReference
+
+	// @JsonManagedReference(value = "owner")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MarketPlaceUser owner;
-
-	@OneToMany
-	@JoinColumn(name = "listing_id")
-	@JsonBackReference(value = "images")
-	private List<Images> images;
-
-//	// @JsonManagedReference(value = "owner")
-//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-//	private MarketPlaceUser owner;
 
 //	@OneToMany
 //	@JoinColumn(name = "listing_id")
@@ -105,18 +97,6 @@ public class Listing implements Timewatch, Serializable {
 
 	public void setOwner(MarketPlaceUser owner) {
 		this.owner = owner;
-	}
-
-	public void setListid(int listid) {
-		this.listid = listid;
-	}
-
-	public List<Images> getImages() {
-		return images;
-	}
-
-	public void setImages(List<Images> images) {
-		this.images = images;
 	}
 
 	public Integer getListid() {

@@ -16,8 +16,8 @@ import com.revature.repository.ListingRepository;
 @Service
 public class ListingService {
 
-	@Autowired
-	private TagService tagService;
+//	@Autowired
+//	private TagService tagService;
 
 	@Autowired
 	private ListingRepository repository;
@@ -40,14 +40,9 @@ public class ListingService {
 		return repository.create(listing);
 	}
 
-	public Listing resetLife(Listing listing) {
+	public Listing update(Listing listing) {
 		listing.resetLife(LocalDateTime.now());
 		return repository.update(listing);
-	}
-
-	public Listing update(Listing listing) {
-		Listing result = repository.update(listing);
-		return result;
 	}
 
 	public void patch(ListingPatchRequest request) {
