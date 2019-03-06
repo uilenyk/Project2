@@ -14,18 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
+@Table(name = "listing")
 @NamedQuery(name = "Listing.findAll", query = "SELECT l FROM Listing l")
 public class Listing implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer listid;
+	private int listid;
 
 	private Boolean active;
 
@@ -42,13 +44,13 @@ public class Listing implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
-	//@JsonManagedReference
+	// @JsonManagedReference
 	private MarketPlaceUser owner;
-	
-//	@OneToMany
-//	@JoinColumn(name = "listing_id")
-//	@JsonBackReference(value = "images")
-//	private List<Images> images;
+
+	@OneToMany
+	@JoinColumn(name = "listing_id")
+	@JsonBackReference(value = "images")
+	private List<Images> images;
 
 	public MarketPlaceUser getOwner() {
 		return owner;
@@ -63,6 +65,18 @@ public class Listing implements Serializable {
 	}
 
 	public Listing() {
+	}
+
+	public void setListid(int listid) {
+		this.listid = listid;
+	}
+
+	public List<Images> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Images> images) {
+		this.images = images;
 	}
 
 	public Integer getListid() {

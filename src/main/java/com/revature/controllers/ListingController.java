@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,18 +28,24 @@ public class ListingController {
 	private ListingService service;
 
 	@GetMapping(path = "")
-	public @ResponseBody ResponseEntity<List<Listing>> findAllListings() {
+	public ResponseEntity<List<Listing>> findAllListings() {
 		List<Listing> listings = service.findAllListings();
 		return new ResponseEntity<>(listings, HttpStatus.OK);
 	}
 
 	@PostMapping(path = "")
-	public @ResponseBody ResponseEntity<Listing> create(@RequestBody Listing listing) {
+	public ResponseEntity<Listing> create(@RequestBody Listing listing) {
 		if (service.create(listing) != null) {
 			return new ResponseEntity<>(listing, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
 		}
+	}
+	
+	@PutMapping(path = "/update/")
+	public ResponseEntity<Listing> update(@RequestBody Listing listing){
+		Listing result = service.update(listing);
+		return null;
 	}
 
 	@DeleteMapping(path = "/{listid}")

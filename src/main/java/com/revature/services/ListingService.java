@@ -29,4 +29,9 @@ public class ListingService {
 	public void delete(Listing listing) {
 		repository.delete(listing);
 	}
+
+	public Listing update(Listing listing) {
+		Listing result = repository.update(listing);
+		return null;
+	}
 }

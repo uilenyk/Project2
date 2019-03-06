@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "credential")
 @NamedQuery(name = "Credential.findAll", query = "SELECT c FROM Credential c")
 public class Credential implements Serializable {
 	private static final long serialVersionUID = 1L;

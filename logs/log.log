@@ -69,3 +69,6 @@
 2019-03-05 22:20:09 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
 2019-03-05 22:20:09 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@10221b4e
 2019-03-05 22:20:09 DEBUG MarketPlaceUserRepository:94 - id in mpu repo: 1000
+2019-03-05 22:47:28 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
+2019-03-05 22:47:28 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@7b6cc070
+2019-03-05 22:47:28 DEBUG MarketPlaceUserRepository:94 - id in mpu repo: 1000
