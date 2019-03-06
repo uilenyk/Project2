@@ -14,10 +14,6 @@ public class MarketPlaceUserService {
 
 	@Autowired
 	private MarketPlaceUserRepository repository;
-
-	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
-		return repository.create(marketPlaceUser);
-	}
 	
 	public MarketPlaceUser findBy(int id) {
 		log.debug("user id in mpu service: "+id);
@@ -26,6 +22,10 @@ public class MarketPlaceUserService {
 		user.setSentMessages(null);
 		user.setReceivedMessages(null);
 		return user;
+	}
+	
+	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
+		return repository.create(marketPlaceUser);
 	}
 
 	public MarketPlaceUser updateUser(MarketPlaceUser user) {
@@ -38,6 +38,7 @@ public class MarketPlaceUserService {
 		}
 		
 	}
+
 
 	public void messageAlert(MarketPlaceUser receiver) {
 		receiver.setNewMessage(true);

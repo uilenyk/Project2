@@ -115,7 +115,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public int getMpuid() {
-		return this.mpuid;
+		return mpuid;
 	}
 
 	public void setMpuid(int mpuid) {
@@ -123,7 +123,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public String getFirstname() {
-		return this.firstname;
+		return firstname;
 	}
 
 	public void setFirstname(String firstname) {
@@ -131,7 +131,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public String getLastname() {
-		return this.lastname;
+		return lastname;
 	}
 
 	public void setLastname(String lastname) {
@@ -139,7 +139,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public String getPseudoname() {
-		return this.pseudoname;
+		return pseudoname;
 	}
 
 	public void setPseudoname(String pseudoname) {
@@ -147,7 +147,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public Address getAddress() {
-		return this.address;
+		return address;
 	}
 
 	public void setAddress(Address address) {
@@ -155,7 +155,7 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public CreditCard getCreditCard() {
-		return this.creditCard;
+		return creditCard;
 	}
 
 	public void setCreditCard(CreditCard creditCard) {
@@ -163,25 +163,22 @@ public class MarketPlaceUser implements Serializable {
 	}
 
 	public PhoneNumber getPhoneNumber() {
-		return this.phoneNumber;
-	}
-
-	public void setPhoneNumbers(PhoneNumber phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public List<Listing> getMarketPlaceUserListings() {
-		return marketPlaceUserListings;
-	}
-
-	public void setMarketPlaceUserListings(List<Listing> marketPlaceUserListings) {
-		this.marketPlaceUserListings = marketPlaceUserListings;
+		return phoneNumber;
 	}
 
 	public void setPhoneNumber(PhoneNumber phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
+
+	public List<Listing> getListings() {
+		return marketPlaceUserListings;
+	}
+
+	public void setListings(List<Listing> listings) {
+		marketPlaceUserListings = listings;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -16,6 +16,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
 import com.revature.models.Message;
 
@@ -25,16 +26,12 @@ public class MarketPlaceUserRepository {
 
 	@Autowired
 	private EntityManagerFactory emf;
-	
 
-	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
-		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try (Session session = sf.openSession()) {
-			int id = (int) session.save(marketPlaceUser);
-			marketPlaceUser.setMpuid(id);
-			return marketPlaceUser;
-		}
+
+	public MarketPlaceUser create(MarketPlaceUser user) {
+		return null;
 	}
+
 
 	public MarketPlaceUser update(MarketPlaceUser updateUser) {
 		System.out.println(updateUser.toString());
@@ -49,6 +46,7 @@ public class MarketPlaceUserRepository {
 			updateUser(user, updateUser);
 			System.out.println(user.toString());
 			session.merge(user);
+
 			// MarketPlaceUser u = session.get(MarketPlaceUser.class, user.getMpuid());
 			tx.commit();
 			if (user != null) 
@@ -56,6 +54,7 @@ public class MarketPlaceUserRepository {
 			else
 				return null;
 		}
+
 	}
 
 	private void updateUser(MarketPlaceUser old, MarketPlaceUser update) {
@@ -95,7 +94,7 @@ public class MarketPlaceUserRepository {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			MarketPlaceUser marketPlaceUser = session.load(MarketPlaceUser.class, id);
-			Hibernate.initialize(marketPlaceUser.getMarketPlaceUserListings());
+			Hibernate.initialize(marketPlaceUser.getListings());
 //			Hibernate.initialize(marketPlaceUser.getSentMessages());
 //			Hibernate.initialize(marketPlaceUser.getReceivedMessages());
 			return marketPlaceUser;
