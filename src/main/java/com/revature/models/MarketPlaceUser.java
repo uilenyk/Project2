@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -29,13 +30,16 @@ public class MarketPlaceUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mpuid;
 
+	@NotNull
 	@Column(length = 50)
 	private String firstname;
 
+	@NotNull
 	@Column(length = 50)
 	private String lastname;
 
-	@Column(length = 50)
+	@NotNull
+	@Column(length = 50, unique = true)
 	private String pseudoname;
 
 	@OneToOne(cascade = CascadeType.MERGE)
