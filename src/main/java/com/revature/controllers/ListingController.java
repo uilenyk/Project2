@@ -59,9 +59,9 @@ public class ListingController {
 	}
 
 	@PatchMapping(path = "/{listid}")
-	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") String listid,
+	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") int listid,
 			@RequestBody ListingPatchRequest request) {
-		request.setListid(Integer.parseInt(listid));
+		request.setListid(listid);
 		listingService.patch(request);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}

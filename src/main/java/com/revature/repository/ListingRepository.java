@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,12 +16,14 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.revature.models.Images;
 import com.revature.models.Listing;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
 
 @Repository
 public class ListingRepository {
+	private Logger log = Logger.getRootLogger();
 
 	@Autowired
 	private EntityManagerFactory emf;
@@ -54,10 +57,23 @@ public class ListingRepository {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
+			List<Images> images = null;
+			if (listing.getImages() != null) {
+				images = listing.getImages();
+				listing.setImages(null);
+			}
 			int id = (int) session.save(listing);
-			Listing createdListing = session.get(Listing.class, id);
+			if (images != null && id != 0) {
+				for (Images i : images) {
+					session.save(i);
+				}
+				listing.setImages(images);
+			}
+			//Listing createdListing = session.get(Listing.class, id);
+			session.flush();
 			tx.commit();
-			return createdListing;
+			log.debug(listing);
+			return listing;
 		}
 	}
 
@@ -79,19 +95,29 @@ public class ListingRepository {
 			Transaction tx = session.beginTransaction();
 			Listing existingListing = session.get(Listing.class, request.getListid());
 			Hibernate.initialize(existingListing.getTags());
-			existingListing.setDescription(request.getDescription());
-			existingListing.setName(request.getName());
-			existingListing.setPrice(request.getPrice());
-			existingListing.getTags().addAll(request.getTags());
+			updateInfo(existingListing, request);
 			session.merge(existingListing);
 			tx.commit();
 		}
 	}
 
+	private void updateInfo(Listing current, ListingPatchRequest updated) {
+		if (updated.getDescription() != null)
+			current.setDescription(updated.getDescription());
+		if (updated.getName() != null)
+			current.setName(updated.getName());
+		if (updated.getPrice() != null)
+			current.setPrice(updated.getPrice());
+		if (updated.getTags() != null)
+			current.getTags().addAll(updated.getTags());
+		if (updated.getImages() != null)
+			current.setImages(updated.getImages());
+	}
+
 	public void patch(MakeInactiveRequest request) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
-			Transaction tx = session.beginTransaction();			
+			Transaction tx = session.beginTransaction();
 			CriteriaBuilder cb = emf.getCriteriaBuilder();
 			CriteriaUpdate<Listing> update = cb.createCriteriaUpdate(Listing.class);
 			Root<Listing> root = update.from(Listing.class);

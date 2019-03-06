@@ -2,3 +2,6 @@
 2019-03-06 01:14:39 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
 2019-03-06 01:14:54 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
 2019-03-06 01:14:54 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-06 10:19:18 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
+2019-03-06 13:38:54 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
+2019-03-06 13:46:38 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon

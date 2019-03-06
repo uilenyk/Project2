@@ -3,6 +3,7 @@ package com.revature.models.requests;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.revature.models.Images;
 import com.revature.models.Tag;
 
 public class ListingPatchRequest {
@@ -13,9 +14,10 @@ public class ListingPatchRequest {
 	private String description;
 	private BigDecimal price;
 	private List<Tag> tags;
+	private List<Images> images;
 
 	public ListingPatchRequest(Integer listid, Boolean active, String name, String description, BigDecimal price,
-			List<Tag> tags) {
+			List<Tag> tags, List<Images> images) {
 		super();
 		this.listid = listid;
 		this.active = active;
@@ -23,6 +25,11 @@ public class ListingPatchRequest {
 		this.description = description;
 		this.price = price;
 		this.tags = tags;
+		this.images = images;
+	}
+
+	public ListingPatchRequest() {
+
 	}
 
 	public Integer getListid() {
@@ -71,6 +78,14 @@ public class ListingPatchRequest {
 
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+
+	public List<Images> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Images> images) {
+		this.images = images;
 	}
 
 	@Override
