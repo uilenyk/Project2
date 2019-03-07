@@ -58,7 +58,7 @@ public class MessageController {
 	@GetMapping("/sent/{id}")
 	public ResponseEntity<List<Message>> getSentMessages(@PathVariable("id") String id){
 		int userId = Integer.parseInt(id);
-		List<Message> results = service.getMessages(userId);
+		List<Message> results = service.getSentMessages(userId);
 		return new ResponseEntity<>(results, HttpStatus.OK);
 	}
 

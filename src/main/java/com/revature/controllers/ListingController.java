@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Listing;
+import com.revature.models.reponse.BuyerReceipt;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
 import com.revature.services.ListingService;
@@ -59,9 +62,9 @@ public class ListingController {
 	}
 
 	@PatchMapping(path = "/{listid}")
-	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") String listid,
+	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") int listid,
 			@RequestBody ListingPatchRequest request) {
-		request.setListid(Integer.parseInt(listid));
+		request.setListid(listid);
 		listingService.patch(request);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
@@ -72,6 +75,25 @@ public class ListingController {
 		makeInactiveRequest.setListid(Integer.parseInt(listid));
 		listingService.patch(makeInactiveRequest);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+	}
+
+	@PutMapping(path = "/{buyer_id}")
+	public ResponseEntity<BuyerReceipt> buyListing(@RequestBody Listing listing,
+			@PathVariable("buyer_id") int buyerId) {
+		try {
+			BuyerReceipt receipt = listingService.buyListing(listing, buyerId);
+			if (receipt == null) {
+				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>(receipt, HttpStatus.OK);
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.GONE);
+		}
+		
 	}
 
 	@DeleteMapping(path = "/{listid}")

@@ -29,7 +29,6 @@ public class MarketPlaceUserService {
 	}
 
 	public MarketPlaceUser updateUser(MarketPlaceUser user) {
-		System.out.println(user.toString());
 		MarketPlaceUser u = repository.update(user);
 		if (u != null) {
 			return u;

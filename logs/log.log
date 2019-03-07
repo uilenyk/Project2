@@ -1,71 +1,75 @@
-2019-03-03 15:40:45 DEBUG MessageService:20 - in message service: Message [id=0, sender=null, receiver=null, parent=null, subject=test send message, content=Testing the send message feature. This is the contents of the test message., created=null]
-2019-03-03 15:41:43 DEBUG MessageService:20 - in message service: Message [id=0, sender=MarketPlaceUser [mpuid=2000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], receiver=null, parent=null, subject=test send message, content=Testing the send message feature. This is the contents of the test message., created=null]
-2019-03-03 15:50:35 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 15:51:39 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 15:53:54 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 15:55:50 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 15:55:50 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-03 15:57:05 DEBUG MarketPlaceUserService:23 - user id in mpu service: 2000
-2019-03-03 15:57:05 DEBUG MarketPlaceUserRepository:90 - id in mpu repo: 2000
-2019-03-03 15:57:25 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-03 15:57:25 DEBUG MarketPlaceUserRepository:90 - id in mpu repo: 1000
-2019-03-03 15:58:49 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 15:58:49 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-03 16:01:15 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 16:01:15 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-03 16:01:15 DEBUG MarketPlaceUserService:24 - 
-2019-03-03 16:01:49 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-03 16:01:49 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@736b7b29
-2019-03-03 16:01:49 DEBUG MarketPlaceUserRepository:88 - id in mpu repo: 1000
-2019-03-03 16:10:37 DEBUG MessageService:19 - receiver id: 1000
-2019-03-03 16:10:37 DEBUG MarketPlaceUserService:26 - user id in mpu service: 1000
-2019-03-03 16:10:37 DEBUG MarketPlaceUserService:27 - com.revature.repository.MarketPlaceUserRepository@1e19aef6
-2019-03-03 16:10:37 DEBUG MarketPlaceUserRepository:92 - id in mpu repo: 1000
-2019-03-03 16:24:18 DEBUG MessageService:21 - receiver id: 1000
-2019-03-03 16:24:18 DEBUG MarketPlaceUserService:24 - user id in mpu service: 1000
-2019-03-03 16:24:18 DEBUG MarketPlaceUserService:25 - 
-2019-03-03 16:34:31 DEBUG MessageService:23 - receiver id: 1000
-2019-03-03 16:34:31 DEBUG MarketPlaceUserService:24 - user id in mpu service: 1000
-2019-03-03 16:34:31 DEBUG MarketPlaceUserService:25 - com.revature.repository.MarketPlaceUserRepository@5c4d3795
-2019-03-03 16:34:31 DEBUG MarketPlaceUserRepository:88 - id in mpu repo: 1000
-2019-03-03 16:34:31 DEBUG MessageService:25 - the receiver: MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=com.revature.models.Address@423994d, creditCard=com.revature.models.CreditCard@359841fc, phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=[com.revature.models.Listing@a17f5e7, com.revature.models.Listing@40ccd486, com.revature.models.Listing@54160ba1, com.revature.models.Listing@28f58f75], sentMessages=null, receivedMessages=null]
-2019-03-03 16:34:31 DEBUG MessageService:27 - in message service: Message [id=0, sender=MarketPlaceUser [mpuid=2000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], receiver=MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=com.revature.models.Address@423994d, creditCard=com.revature.models.CreditCard@359841fc, phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=[com.revature.models.Listing@a17f5e7, com.revature.models.Listing@40ccd486, com.revature.models.Listing@54160ba1, com.revature.models.Listing@28f58f75], sentMessages=null, receivedMessages=null], parent=null, subject=test send message, content=Testing the send message feature. This is the contents of the test message., created=null]
-2019-03-03 17:46:50 DEBUG MessageService:25 - receiver id: 1000
-2019-03-03 17:46:50 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-03 17:46:50 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@1d5ed8fa
-2019-03-03 17:46:50 DEBUG MarketPlaceUserRepository:87 - id in mpu repo: 1000
-2019-03-03 17:46:51 DEBUG MessageService:27 - the receiver: MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=true, address=com.revature.models.Address@39e2ed2b, creditCard=com.revature.models.CreditCard@2f6e4a0e, phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=[com.revature.models.Listing@27afb165, com.revature.models.Listing@16e5c4f7, com.revature.models.Listing@19ac629e, com.revature.models.Listing@7a5b131d], sentMessages=null, receivedMessages=null]
-2019-03-03 17:46:51 DEBUG MessageService:29 - in message service: Message [id=0, sender=MarketPlaceUser [mpuid=2000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], receiver=MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=true, address=com.revature.models.Address@39e2ed2b, creditCard=com.revature.models.CreditCard@2f6e4a0e, phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=[com.revature.models.Listing@27afb165, com.revature.models.Listing@16e5c4f7, com.revature.models.Listing@19ac629e, com.revature.models.Listing@7a5b131d], sentMessages=null, receivedMessages=null], parent=null, subject=test send message 2, content=Testing the send message feature again. This is the contents of the test message. Hoping to get 2 messages back in the get messages function, created=null]
-2019-03-03 18:26:46 DEBUG MarketPlaceUserService:23 - user id in mpu service: 2000
-2019-03-03 18:26:46 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@1d1646d1
-2019-03-03 18:26:46 DEBUG MarketPlaceUserRepository:87 - id in mpu repo: 2000
-2019-03-03 18:28:40 DEBUG MarketPlaceUserService:23 - user id in mpu service: 2000
-2019-03-03 18:28:40 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@2265cf1c
-2019-03-03 18:28:40 DEBUG MarketPlaceUserRepository:87 - id in mpu repo: 2000
-2019-03-04 18:54:47 DEBUG MessageService:32 - receiver psudoname: PseudoSteveMcQueen
-2019-03-04 18:56:30 DEBUG MessageService:32 - receiver psudoname: PseudoSteveMcQueen
-2019-03-04 19:00:28 DEBUG MessageService:32 - receiver psudoname: PseudoSteveMcQueen
-2019-03-04 19:02:52 DEBUG MessageService:32 - receiver psudoname: PseudoSteveMcQueen
-2019-03-04 19:02:53 DEBUG MessageService:42 - in message service: Message [id=0, sender=MarketPlaceUser [mpuid=2000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], receiver=MarketPlaceUser [mpuid=3000, firstname=Steve, lastname=McQueen, pseudoname=PseudoSteveMcQueen, newMessage=false, address=com.revature.models.Address@2a5c02a7, creditCard=com.revature.models.CreditCard@35344f57, phoneNumber=PhoneNumber [id=300, areaCodeThree=700, blockFour=4901, blockThree=220], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null], parent=null, subject=test message with new get user by name, content=Testing send message functionality. This time the receiver is gotten by their screenname. This is the contents of the message., created=null]
-2019-03-04 20:48:09 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 20:50:06 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 20:50:06 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 20:52:56 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 20:52:56 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:00:49 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:00:49 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:02:33 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:02:33 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:04:38 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:04:38 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:07:34 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:07:34 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:16:55 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:16:55 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:19:50 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:19:50 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:21:10 DEBUG MessageRepository:72 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-04 21:21:10 DEBUG MessageService:54 - PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343]
-2019-03-05 22:20:09 DEBUG MarketPlaceUserService:23 - user id in mpu service: 1000
-2019-03-05 22:20:09 DEBUG MarketPlaceUserService:24 - com.revature.repository.MarketPlaceUserRepository@10221b4e
-2019-03-05 22:20:09 DEBUG MarketPlaceUserRepository:94 - id in mpu repo: 1000
+2019-03-06 01:14:39 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-06 01:14:39 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-06 01:14:54 DEBUG MessageRepository:72 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-06 01:14:54 DEBUG MessageService:54 - PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222]
+2019-03-06 10:19:18 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
+2019-03-06 13:38:54 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
+2019-03-06 13:46:38 DEBUG MessageService:32 - receiver psudoname: PseudoThomasReardon
+2019-03-06 14:17:08 DEBUG ListingRepository:75 - Listing [listid=4, active=true, description=Laptop for sale by Thomas, name=Listing for laptop, price=1000, tags=[Tag [tagid=6600, tagName=electronics, listings=null]], timeout=2019-04-05 14:17:08.131, owner=MarketPlaceUser [mpuid=2000, firstname=null, lastname=null, pseudoname=null, newMessage=false, address=null, creditCard=null, phoneNumber=null, marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]]
+2019-03-06 15:48:13 DEBUG ListingRepository:149 - 4
+2019-03-06 15:49:32 DEBUG ListingRepository:149 - 4
+2019-03-06 15:55:40 DEBUG ListingRepository:150 - 4
+2019-03-06 15:58:19 DEBUG ListingRepository:150 - 3
+2019-03-06 16:04:08 DEBUG ListingRepository:150 - 3
+2019-03-06 16:04:08 DEBUG ListingRepository:160 - CreditCard [id=0, balance=26000]
+2019-03-06 16:06:56 DEBUG ListingRepository:150 - 3
+2019-03-06 16:06:56 DEBUG ListingRepository:153 - 
+2019-03-06 16:07:22 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:07:22 DEBUG ListingRepository:161 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:09:58 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:09:58 DEBUG ListingRepository:161 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:12:54 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:12:54 DEBUG ListingRepository:164 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:14:02 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:14:02 DEBUG ListingRepository:164 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:16:37 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:16:37 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:16:37 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:18:40 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:18:40 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:18:40 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:18:40 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:18:40 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:18:40 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:18:40 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:19:46 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:19:46 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:19:46 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:19:46 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:19:46 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:19:46 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:19:46 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:22:31 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:22:31 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:22:31 DEBUG ListingRepository:165 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:22:31 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:22:31 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:22:31 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:22:31 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:22:31 DEBUG ListingRepository:177 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:22:31 DEBUG ListingService:84 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:26:33 DEBUG ListingRepository:150 - 4442
+2019-03-06 16:26:33 DEBUG ListingRepository:163 - CreditCard [id=50, balance=18000.00]
+2019-03-06 16:26:33 DEBUG ListingRepository:165 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:26:33 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:26:33 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:26:33 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:26:33 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:26:33 DEBUG ListingRepository:177 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:26:33 DEBUG ListingService:84 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:30:05 DEBUG ListingRepository:150 - 4443
+2019-03-06 16:30:05 DEBUG ListingRepository:163 - CreditCard [id=50, balance=16500.00]
+2019-03-06 16:30:05 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=Address [id=20000, city=Tampa, state=Florida, streetname=Fletcher, streetnumber=12678, zipcode=3316], creditCard=CreditCard [id=0, balance=24500], phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:30:05 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:30:05 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:30:05 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:30:05 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:31:54 DEBUG ListingRepository:150 - 4443
+2019-03-06 16:31:54 DEBUG ListingRepository:163 - CreditCard [id=50, balance=16500.00]
+2019-03-06 16:31:54 DEBUG ListingRepository:165 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:31:54 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:31:54 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:31:54 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:31:54 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:31:54 DEBUG ListingRepository:177 - buyerName=PseudoThomasReardon, sellerName=PseudoKyneLiu, boughtItem=Listing [listid=4443, active=false, description=Generation 3 Legendary Pokemon Cards, name=Listing 3, price=1500, tags=[Tag [tagid=6900, tagName=antique, listings=null]], timeout=2019-06-10 18:00:00.0, owner=MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=Address [id=20000, city=Tampa, state=Florida, streetname=Fletcher, streetnumber=12678, zipcode=3316], creditCard=CreditCard [id=0, balance=24500], phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]]]
+2019-03-06 16:31:54 DEBUG ListingService:84 - buyerName=PseudoThomasReardon, sellerName=PseudoKyneLiu, boughtItem=Listing [listid=4443, active=false, description=Generation 3 Legendary Pokemon Cards, name=Listing 3, price=1500, tags=[Tag [tagid=6900, tagName=antique, listings=null]], timeout=2019-06-10 18:00:00.0, owner=MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=Address [id=20000, city=Tampa, state=Florida, streetname=Fletcher, streetnumber=12678, zipcode=3316], creditCard=CreditCard [id=0, balance=24500], phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]]]

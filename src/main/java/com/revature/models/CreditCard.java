@@ -27,6 +27,14 @@ public class CreditCard implements Serializable {
 	public CreditCard() {
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public BigDecimal getBalance() {
 		return this.balance;
 	}

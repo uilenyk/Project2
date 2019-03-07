@@ -30,16 +30,13 @@ public class Credential implements Serializable {
 	@NotNull
 	private String password;
 
-	private String salt;
-
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "mpuid")
 	private MarketPlaceUser marketPlaceUser;
 
-	public Credential(String email, String password, String salt, MarketPlaceUser marketPlaceUser) {
+	public Credential(String email, String password, MarketPlaceUser marketPlaceUser) {
 		this.email = email;
 		this.password = password;
-		this.salt = salt;
 		this.marketPlaceUser = marketPlaceUser;
 	}
 
@@ -62,10 +59,6 @@ public class Credential implements Serializable {
 		this.email = email;
 	}
 
-	public String getSalt() {
-		return this.salt;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -76,10 +69,6 @@ public class Credential implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 
 	public MarketPlaceUser getMarketPlaceUser() {
@@ -97,7 +86,6 @@ public class Credential implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((marketPlaceUser == null) ? 0 : marketPlaceUser.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		return result;
 	}
 
@@ -125,18 +113,13 @@ public class Credential implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (salt == null) {
-			if (other.salt != null)
-				return false;
-		} else if (!salt.equals(other.salt))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Credential [id=" + id + ", email=" + email + ", password=" + password + ", salt=" + salt
-				+ ", marketPlaceUser=" + marketPlaceUser + "]";
+		return "Credential [id=" + id + ", email=" + email + ", password=" + password + ", marketPlaceUser="
+				+ marketPlaceUser + "]";
 	}
 
 }

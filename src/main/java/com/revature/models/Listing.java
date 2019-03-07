@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 
@@ -25,6 +26,7 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.revature.abstraction.Timewatch;
 
@@ -37,7 +39,7 @@ public class Listing implements Timewatch, Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer listid;
+	private int listid;
 
 	private Boolean active;
 
@@ -59,15 +61,14 @@ public class Listing implements Timewatch, Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mpu_id")
-
 	// @JsonManagedReference(value = "owner")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MarketPlaceUser owner;
 
-//	@OneToMany
-//	@JoinColumn(name = "listing_id")
-//	@JsonBackReference(value = "images")
-//	private List<Images> images;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "listing_id")
+	@JsonManagedReference(value = "images")
+	private List<Images> images;
 
 	public Listing() {
 	}
@@ -89,6 +90,18 @@ public class Listing implements Timewatch, Serializable {
 		if (timeDiff < 7) {
 			this.setLife(10, true);
 		}
+	}
+
+	public void setListid(int listid) {
+		this.listid = listid;
+	}
+
+	public List<Images> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Images> images) {
+		this.images = images;
 	}
 
 	public MarketPlaceUser getOwner() {

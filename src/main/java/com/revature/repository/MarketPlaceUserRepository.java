@@ -42,7 +42,6 @@ public class MarketPlaceUserRepository {
 	}
 
 	public MarketPlaceUser update(MarketPlaceUser updateUser) {
-		System.out.println(updateUser.toString());
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
@@ -50,9 +49,7 @@ public class MarketPlaceUserRepository {
 			if (user == null) {
 				return null;
 			}
-			System.out.println(user.toString());
 			updateUser(user, updateUser);
-			System.out.println(user.toString());
 			session.merge(user);
 			// MarketPlaceUser u = session.get(MarketPlaceUser.class, user.getMpuid());
 			tx.commit();
