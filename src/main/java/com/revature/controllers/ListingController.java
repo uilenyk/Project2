@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.revature.models.Listing;
 import com.revature.models.reponse.BuyerReceipt;
@@ -80,26 +81,20 @@ public class ListingController {
 	@PutMapping(path = "/{buyer_id}")
 	public ResponseEntity<BuyerReceipt> buyListing(@RequestBody Listing listing,
 			@PathVariable("buyer_id") int buyerId) {
-		try {
-			BuyerReceipt receipt = listingService.buyListing(listing, buyerId);
-			if (receipt == null) {
-				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-			}
-			return new ResponseEntity<>(receipt, HttpStatus.OK);
-		} catch(SQLException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(null, HttpStatus.GONE);
-		}
-		
+		BuyerReceipt receipt = listingService.buyListing(listing, buyerId);
+		return new ResponseEntity<>(receipt, HttpStatus.OK);
 	}
 
 	@DeleteMapping(path = "/{listid}")
 	public @ResponseBody ResponseEntity<Void> deleteListing(@PathVariable("listid") String listid) {
 		listingService.delete(Integer.parseInt(listid));
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<String> handleHttpClientException(HttpClientErrorException e) {
+		String message = e.getMessage();
+		return ResponseEntity.status(e.getStatusCode()).body(message);
 	}
 
 }
