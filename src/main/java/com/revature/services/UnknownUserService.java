@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,15 @@ public class UnknownUserService {
 		if (login == null) {
 			return null;
 		}
-		if (givenPassword.equals(login.getPassword())) {
+		if (BCrypt.checkpw(givenPassword, login.getPassword())/*givenPassword.equals(login.getPassword())*/) {
 			return login.getMarketPlaceUser();
 		}
 		return null;
 	}
 
 	public MarketPlaceUser create(Credential cred) {
+		String hashed = BCrypt.hashpw(cred.getPassword(), BCrypt.gensalt(12));
+		cred.setPassword(hashed);
 		MarketPlaceUser user = repository.createUser(cred);
 		if(user == null) {
 			return null;

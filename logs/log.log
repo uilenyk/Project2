@@ -12,3 +12,64 @@
 2019-03-06 15:58:19 DEBUG ListingRepository:150 - 3
 2019-03-06 16:04:08 DEBUG ListingRepository:150 - 3
 2019-03-06 16:04:08 DEBUG ListingRepository:160 - CreditCard [id=0, balance=26000]
+2019-03-06 16:06:56 DEBUG ListingRepository:150 - 3
+2019-03-06 16:06:56 DEBUG ListingRepository:153 - 
+2019-03-06 16:07:22 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:07:22 DEBUG ListingRepository:161 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:09:58 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:09:58 DEBUG ListingRepository:161 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:12:54 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:12:54 DEBUG ListingRepository:164 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:14:02 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:14:02 DEBUG ListingRepository:164 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:16:37 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:16:37 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:16:37 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:18:40 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:18:40 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:18:40 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:18:40 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:18:40 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:18:40 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:18:40 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:19:46 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:19:46 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:19:46 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=1000, firstname=Thomas, lastname=Reardon, pseudoname=PseudoThomasReardon, newMessage=false, address=Address [id=10000, city=Tampa, state=Florida, streetname=Bruce B Downs Blvd, streetnumber=12702, zipcode=3316], creditCard=CreditCard [id=0, balance=20500], phoneNumber=PhoneNumber [id=100, areaCodeThree=900, blockFour=3333, blockThree=222], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:19:46 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:19:46 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:19:46 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:19:46 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:22:31 DEBUG ListingRepository:150 - 4441
+2019-03-06 16:22:31 DEBUG ListingRepository:163 - CreditCard [id=55, balance=24500.00]
+2019-03-06 16:22:31 DEBUG ListingRepository:165 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:22:31 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:22:31 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:22:31 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:22:31 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:22:31 DEBUG ListingRepository:177 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:22:31 DEBUG ListingService:84 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:26:33 DEBUG ListingRepository:150 - 4442
+2019-03-06 16:26:33 DEBUG ListingRepository:163 - CreditCard [id=50, balance=18000.00]
+2019-03-06 16:26:33 DEBUG ListingRepository:165 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:26:33 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:26:33 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:26:33 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:26:33 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:26:33 DEBUG ListingRepository:177 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:26:33 DEBUG ListingService:84 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:30:05 DEBUG ListingRepository:150 - 4443
+2019-03-06 16:30:05 DEBUG ListingRepository:163 - CreditCard [id=50, balance=16500.00]
+2019-03-06 16:30:05 DEBUG ListingRepository:165 - MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=Address [id=20000, city=Tampa, state=Florida, streetname=Fletcher, streetnumber=12678, zipcode=3316], creditCard=CreditCard [id=0, balance=24500], phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]
+2019-03-06 16:30:05 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:30:05 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:30:05 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:30:05 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:31:54 DEBUG ListingRepository:150 - 4443
+2019-03-06 16:31:54 DEBUG ListingRepository:163 - CreditCard [id=50, balance=16500.00]
+2019-03-06 16:31:54 DEBUG ListingRepository:165 - org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.revature.models.MarketPlaceUser.marketPlaceUserListings, could not initialize proxy - no Session
+2019-03-06 16:31:54 DEBUG ListingRepository:168 - after merge seller
+2019-03-06 16:31:54 DEBUG ListingRepository:170 - after set buyer name to result
+2019-03-06 16:31:54 DEBUG ListingRepository:172 - after set seller name to result
+2019-03-06 16:31:54 DEBUG ListingRepository:174 - after set listing to result
+2019-03-06 16:31:54 DEBUG ListingRepository:177 - buyerName=PseudoThomasReardon, sellerName=PseudoKyneLiu, boughtItem=Listing [listid=4443, active=false, description=Generation 3 Legendary Pokemon Cards, name=Listing 3, price=1500, tags=[Tag [tagid=6900, tagName=antique, listings=null]], timeout=2019-06-10 18:00:00.0, owner=MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=Address [id=20000, city=Tampa, state=Florida, streetname=Fletcher, streetnumber=12678, zipcode=3316], creditCard=CreditCard [id=0, balance=24500], phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]]]
+2019-03-06 16:31:54 DEBUG ListingService:84 - buyerName=PseudoThomasReardon, sellerName=PseudoKyneLiu, boughtItem=Listing [listid=4443, active=false, description=Generation 3 Legendary Pokemon Cards, name=Listing 3, price=1500, tags=[Tag [tagid=6900, tagName=antique, listings=null]], timeout=2019-06-10 18:00:00.0, owner=MarketPlaceUser [mpuid=2000, firstname=Kyne, lastname=Liu, pseudoname=PseudoKyneLiu, newMessage=false, address=Address [id=20000, city=Tampa, state=Florida, streetname=Fletcher, streetnumber=12678, zipcode=3316], creditCard=CreditCard [id=0, balance=24500], phoneNumber=PhoneNumber [id=200, areaCodeThree=800, blockFour=9034, blockThree=343], marketPlaceUserListings=null, sentMessages=null, receivedMessages=null]]]

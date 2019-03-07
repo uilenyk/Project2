@@ -47,6 +47,12 @@ public class UnknownUserRepository {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
+			int addressId = (int) session.save(cred.getMarketPlaceUser().getAddress());
+			int phoneId = (int) session.save(cred.getMarketPlaceUser().getPhoneNumber());
+			int creditId = (int) session.save(cred.getMarketPlaceUser().getCreditCard());
+			cred.getMarketPlaceUser().getAddress().setId(addressId);
+			cred.getMarketPlaceUser().getPhoneNumber().setId(phoneId);
+			cred.getMarketPlaceUser().getCreditCard().setId(creditId);
 			session.persist(cred);
 			session.flush();
 			tx.commit();
