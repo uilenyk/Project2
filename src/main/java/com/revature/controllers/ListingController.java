@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.revature.models.Listing;
-import com.revature.models.reponse.BuyerReceipt;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
+import com.revature.models.response.BuyerReceipt;
 import com.revature.services.ListingService;
 
 @RestController
@@ -34,6 +34,12 @@ public class ListingController {
 	@Autowired
 	private ListingService listingService;
 
+	/**
+	 * Client wants to retrieve listings
+	 * 
+	 * @param active
+	 * @return
+	 */
 	@GetMapping(path = "")
 	public @ResponseBody ResponseEntity<List<Listing>> getAllListings(
 			@RequestParam(value = "active", required = false, defaultValue = "true") String active) {
@@ -44,6 +50,12 @@ public class ListingController {
 		return new ResponseEntity<>(listings, HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Client wants to retrieve listings
+	 * 
+	 * @param listid
+	 * @return
+	 */
 	@GetMapping(path = "/{listid}")
 	public @ResponseBody ResponseEntity<Listing> getListing(@PathVariable("listid") String listid) {
 		Listing listing = listingService.findBy(Integer.parseInt(listid));
@@ -53,6 +65,12 @@ public class ListingController {
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Client wants to add listing
+	 * 
+	 * @param listing
+	 * @return
+	 */
 	@PostMapping(path = "")
 	public @ResponseBody ResponseEntity<Listing> addListing(@RequestBody Listing listing) {
 		Listing createdListing = listingService.create(listing);
@@ -62,6 +80,13 @@ public class ListingController {
 		return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
 	}
 
+	/**
+	 * Client wants to edit a listing
+	 * 
+	 * @param listid
+	 * @param request
+	 * @return
+	 */
 	@PatchMapping(path = "/{listid}")
 	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") int listid,
 			@RequestBody ListingPatchRequest request) {
@@ -70,6 +95,13 @@ public class ListingController {
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Client wants to make a listing active or inactive
+	 * 
+	 * @param listid
+	 * @param makeInactiveRequest
+	 * @return
+	 */
 	@PatchMapping(path = "/{listid}/active")
 	public @ResponseBody ResponseEntity<Void> makeListingInactive(@PathVariable("listid") String listid,
 			@RequestBody MakeInactiveRequest makeInactiveRequest) {
@@ -78,13 +110,27 @@ public class ListingController {
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Client wants to buy a listing from a seller within the market place
+	 * 
+	 * @param listing
+	 * @param buyerId
+	 * @return
+	 * @throws Exception
+	 */
 	@PutMapping(path = "/{buyer_id}")
-	public ResponseEntity<BuyerReceipt> buyListing(@RequestBody Listing listing,
-			@PathVariable("buyer_id") int buyerId) {
+	public ResponseEntity<BuyerReceipt> buyListing(@RequestBody Listing listing, @PathVariable("buyer_id") int buyerId)
+			throws Exception {
 		BuyerReceipt receipt = listingService.buyListing(listing, buyerId);
 		return new ResponseEntity<>(receipt, HttpStatus.OK);
 	}
 
+	/**
+	 * Delete a listing
+	 * 
+	 * @param listid
+	 * @return
+	 */
 	@DeleteMapping(path = "/{listid}")
 	public @ResponseBody ResponseEntity<Void> deleteListing(@PathVariable("listid") String listid) {
 		listingService.delete(Integer.parseInt(listid));

@@ -1,4 +1,4 @@
-package com.revature.models.reponse;
+package com.revature.models.response;
 
 import com.revature.models.CreditCard;
 import com.revature.models.Listing;

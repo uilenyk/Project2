@@ -33,50 +33,98 @@ public class Address implements Serializable {
 	public Address() {
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getCity() {
 		return this.city;
 	}
 
+	/**
+	 * 
+	 * @param city
+	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getState() {
 		return this.state;
 	}
 
+	/**
+	 * 
+	 * @param state
+	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getStreetname() {
 		return this.streetname;
 	}
 
+	/**
+	 * 
+	 * @param streetname
+	 */
 	public void setStreetname(String streetname) {
 		this.streetname = streetname;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getStreetnumber() {
 		return this.streetnumber;
 	}
 
+	/**
+	 * 
+	 * @param streetnumber
+	 */
 	public void setStreetnumber(Integer streetnumber) {
 		this.streetnumber = streetnumber;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getZipcode() {
 		return this.zipcode;
 	}
 
+	/**
+	 * 
+	 * @param zipcode
+	 */
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
 	}

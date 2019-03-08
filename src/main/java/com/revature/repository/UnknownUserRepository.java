@@ -23,6 +23,13 @@ public class UnknownUserRepository {
 	@Autowired
 	EntityManagerFactory emf;
 
+	/**
+	 * Gets a email from the service and requests the row with the matching email
+	 * from the credential table
+	 * 
+	 * @param email: email of the user
+	 * @return: returns a credential object with the matching email
+	 */
 	public Credential auth(String email) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
@@ -43,23 +50,35 @@ public class UnknownUserRepository {
 		}
 	}
 
+	/**
+	 * Gets a credential object from the service and saves it along with the new
+	 * user to the database
+	 * 
+	 * @param cred: the new user with the provided credentials
+	 * @return: user on success and null if something goes wrong
+	 */
 	public MarketPlaceUser createUser(Credential cred) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
 			int addressId = (int) session.save(cred.getMarketPlaceUser().getAddress());
 			int phoneId = (int) session.save(cred.getMarketPlaceUser().getPhoneNumber());
-			int creditId = (int) session.save(cred.getMarketPlaceUser().getCreditCard());
+			int creditId = 0;
+			if(cred.getMarketPlaceUser().getCreditCard() != null) {
+				creditId = (int) session.save(cred.getMarketPlaceUser().getCreditCard());
+			}
 			cred.getMarketPlaceUser().getAddress().setId(addressId);
 			cred.getMarketPlaceUser().getPhoneNumber().setId(phoneId);
-			cred.getMarketPlaceUser().getCreditCard().setId(creditId);
+			if(creditId != 0) {
+				cred.getMarketPlaceUser().getCreditCard().setId(creditId);
+			}
 			session.persist(cred);
 			session.flush();
 			tx.commit();
 			int newUserId = cred.getMarketPlaceUser().getMpuid();
-			if(newUserId != 0)
+			if (newUserId != 0)
 				return cred.getMarketPlaceUser();
-			else 
+			else
 				return null;
 		}
 	}

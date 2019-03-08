@@ -43,35 +43,74 @@ public class Credential implements Serializable {
 	public Credential() {
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getEmail() {
 		return email;
 	}
 
-
+	/**
+	 * 
+	 * @param email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public MarketPlaceUser getMarketPlaceUser() {
 		return this.marketPlaceUser;
 	}
 
+	/**
+	 * 
+	 * @param marketPlaceUser
+	 */
 	public void setMarketPlaceUser(MarketPlaceUser marketPlaceUser) {
 		this.marketPlaceUser = marketPlaceUser;
 	}

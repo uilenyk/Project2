@@ -19,6 +19,12 @@ public class TagRepository {
 	@Autowired
 	private EntityManagerFactory emf;
 
+	/**
+	 * Retrieves Tag by id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Tag findBy(int id) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
@@ -27,6 +33,11 @@ public class TagRepository {
 		}
 	}
 
+	/**
+	 * Retrieves all Tags
+	 * 
+	 * @return
+	 */
 	public List<Tag> findAll() {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {
@@ -37,6 +48,12 @@ public class TagRepository {
 		}
 	}
 
+	/**
+	 * Create Tags
+	 * 
+	 * @param tag
+	 * @return
+	 */
 	public Tag create(Tag tag) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
 		try (Session session = sf.openSession()) {

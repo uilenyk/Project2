@@ -20,23 +20,25 @@ import com.revature.models.Message;
 
 @Repository
 public class MessageRepository {
-	
+
 	private Logger log = Logger.getRootLogger();
 
 	@Autowired
 	private EntityManagerFactory emf;
 
 	/**
-	 * Creates a new message and add the parent id if it is not the first message of a conversation
+	 * Creates a new message and add the parent id if it is not the first message of
+	 * a conversation
+	 * 
 	 * @param newMessage: the message to be added to the database
 	 * @param parentId: the id of the message the newMessage is replying to
 	 * @return: returns the message on success
 	 */
 	public Message createMessage(Message newMessage, int parentId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()){
+		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
-			if(parentId != 0) {
+			if (parentId != 0) {
 				Message parent = session.get(Message.class, parentId);
 				newMessage.setParent(parent);
 			}
@@ -44,7 +46,7 @@ public class MessageRepository {
 			session.flush();
 			tx.commit();
 			int id = newMessage.getId();
-			if(id == 0) {
+			if (id == 0) {
 				return null;
 			} else {
 				return newMessage;
@@ -53,45 +55,52 @@ public class MessageRepository {
 	}
 
 	/**
-	 * Gets all the messages the has been sent to the user
+	 * Gets all the messages where the give userId matches the receiver_id on the
+	 * message
+	 * 
 	 * @param userId: mpuid or id of the user on the database
-	 * @return: list of messages
+	 * @return: list of messages received by the user
 	 */
 	public List<Message> getMessages(int userId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()){
+		try (Session session = sf.openSession()) {
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<Message> messages = cb.createQuery(Message.class);
 			Root<Message> root = messages.from(Message.class);
-			
-			messages.select(root)
-				.where(cb.equal(root.get("receiver").<Integer>get("mpuid"), new Integer(userId)));
-			
+
+			messages.select(root).where(cb.equal(root.get("receiver").<Integer>get("mpuid"), new Integer(userId)));
+
 			Query<Message> query = session.createQuery(messages);
 			List<Message> results = query.getResultList();
 			log.debug(results.get(0).getReceiver().getPhoneNumber().toString());
 			return results;
 		}
 	}
-	
+
+	/**
+	 * Gets an user id from the service then fetches the messages from the db where
+	 * the sender_id matches the given id
+	 * 
+	 * @param userId: id of the user who sent the messages
+	 * @return: list of messages sent by the user
+	 */
 	public List<Message> getSentMessages(int userId) {
 		SessionFactory sf = emf.unwrap(SessionFactory.class);
-		try(Session session = sf.openSession()){
+		try (Session session = sf.openSession()) {
 			CriteriaBuilder cb = session.getCriteriaBuilder();
 			CriteriaQuery<Message> messages = cb.createQuery(Message.class);
 			Root<Message> root = messages.from(Message.class);
-			
-			messages.select(root)
-				.where(cb.equal(root.get("sender").<Integer>get("mpuid"), new Integer(userId)));
-			
+
+			messages.select(root).where(cb.equal(root.get("sender").<Integer>get("mpuid"), new Integer(userId)));
+
 			Query<Message> query = session.createQuery(messages);
 			List<Message> results = query.getResultList();
-			
-			for(Message m: results) {
+
+			for (Message m : results) {
 				Hibernate.initialize(m.getReceiver());
 				Hibernate.initialize(m.getSender());
 			}
-			
+
 			return results;
 		}
 	}
