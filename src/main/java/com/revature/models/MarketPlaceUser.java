@@ -189,7 +189,7 @@ public class MarketPlaceUser implements Serializable {
 	public void setListings(List<Listing> listings) {
 		this.listings = listings;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

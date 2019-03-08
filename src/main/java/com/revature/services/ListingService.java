@@ -29,6 +29,9 @@ public class ListingService {
 	private MarketPlaceUserService mpus;
 
 	@Autowired
+	private TagService tagService;
+
+	@Autowired
 	private ListingRepository repository;
 
 	public Listing findBy(int id) {
