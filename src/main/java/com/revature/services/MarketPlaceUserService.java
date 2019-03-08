@@ -28,10 +28,6 @@ public class MarketPlaceUserService {
 		return repository.create(marketPlaceUser);
 	}
 
-	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
-		return repository.create(marketPlaceUser);
-	}
-
 	public MarketPlaceUser updateUser(MarketPlaceUser user) {
 		MarketPlaceUser u = repository.update(user);
 		if (u != null) {
