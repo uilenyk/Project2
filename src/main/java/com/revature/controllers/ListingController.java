@@ -141,6 +141,7 @@ public class ListingController {
 	public ResponseEntity<String> handleHttpClientException(HttpClientErrorException e) {
 		String message = e.getMessage();
 		return ResponseEntity.status(e.getStatusCode()).body(message);
+
 	}
 
 }

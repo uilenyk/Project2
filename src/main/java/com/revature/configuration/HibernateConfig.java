@@ -20,7 +20,6 @@ import com.revature.models.CreditCard;
 import com.revature.models.Images;
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
-import com.revature.models.Message;
 import com.revature.models.PhoneNumber;
 import com.revature.models.Tag;
 	
@@ -59,9 +58,9 @@ public class HibernateConfig {
 		System.out.println("Configuring data source");
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl(System.getenv("PROJECT2_TEST_URL"));
-		dataSource.setUsername(System.getenv("PROJECT2_TEST_USER"));
-		dataSource.setPassword(System.getenv("PROJECT2_TEST_PASS"));
+		dataSource.setUrl(System.getenv("PROJECT2_URL"));
+		dataSource.setUsername(System.getenv("PROJECT2_USER"));
+		dataSource.setPassword(System.getenv("PROJECT2_PASS"));
 		return dataSource;
 	}
 	

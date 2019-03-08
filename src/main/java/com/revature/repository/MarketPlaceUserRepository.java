@@ -51,6 +51,7 @@ public class MarketPlaceUserRepository {
 			}
 			updateUser(user, updateUser);
 			session.merge(user);
+
 			// MarketPlaceUser u = session.get(MarketPlaceUser.class, user.getMpuid());
 			tx.commit();
 			if (user != null)
@@ -58,6 +59,7 @@ public class MarketPlaceUserRepository {
 			else
 				return null;
 		}
+
 	}
 
 	private void updateUser(MarketPlaceUser old, MarketPlaceUser update) {

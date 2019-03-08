@@ -23,6 +23,10 @@ public class MarketPlaceUserService {
 		user.setReceivedMessages(null);
 		return user;
 	}
+	
+	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
+		return repository.create(marketPlaceUser);
+	}
 
 	public MarketPlaceUser create(MarketPlaceUser marketPlaceUser) {
 		return repository.create(marketPlaceUser);
@@ -37,6 +41,7 @@ public class MarketPlaceUserService {
 		}
 
 	}
+
 
 	public void messageAlert(MarketPlaceUser receiver) {
 		receiver.setNewMessage(true);
