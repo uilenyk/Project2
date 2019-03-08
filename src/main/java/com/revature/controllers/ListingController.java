@@ -35,7 +35,7 @@ public class ListingController {
 	private ListingService listingService;
 
 	/**
-	 * Get listings from the server
+	 * Client wants to retrieve listings
 	 * 
 	 * @param active
 	 * @return
@@ -51,7 +51,7 @@ public class ListingController {
 	}
 
 	/**
-	 * Get a single listings
+	 * Client wants to retrieve listings
 	 * 
 	 * @param listid
 	 * @return
@@ -66,7 +66,7 @@ public class ListingController {
 	}
 
 	/**
-	 * Add a listing
+	 * Client wants to add listing
 	 * 
 	 * @param listing
 	 * @return
@@ -81,7 +81,7 @@ public class ListingController {
 	}
 
 	/**
-	 * Edit a listing
+	 * Client wants to edit a listing
 	 * 
 	 * @param listid
 	 * @param request
@@ -96,7 +96,7 @@ public class ListingController {
 	}
 
 	/**
-	 * Make a listing active or inactive
+	 * Client wants to make a listing active or inactive
 	 * 
 	 * @param listid
 	 * @param makeInactiveRequest
@@ -111,7 +111,7 @@ public class ListingController {
 	}
 
 	/**
-	 * Buy a listing
+	 * Client wants to buy a listing from a seller within the market place
 	 * 
 	 * @param listing
 	 * @param buyerId
