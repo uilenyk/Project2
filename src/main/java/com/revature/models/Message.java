@@ -60,61 +60,116 @@ public class Message implements Serializable {
 
 	public Message() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public MarketPlaceUser getSender() {
 		return sender;
 	}
 
+	/**
+	 * 
+	 * @param sender
+	 */
 	public void setSender(MarketPlaceUser sender) {
 		this.sender = sender;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public MarketPlaceUser getReceiver() {
 		return receiver;
 	}
 
+	/**
+	 * 
+	 * @param receiver
+	 */
 	public void setReceiver(MarketPlaceUser receiver) {
 		this.receiver = receiver;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Message getParent() {
 		return parent;
 	}
 
+	/**
+	 * 
+	 * @param parent
+	 */
 	public void setParent(Message parent) {
 		this.parent = parent;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getSubject() {
 		return subject;
 	}
 
+	/**
+	 * 
+	 * @param subject
+	 */
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getContent() {
 		return content;
 	}
 
+	/**
+	 * 
+	 * @param content
+	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Timestamp getCreated() {
 		return created;
 	}
 
+	/**
+	 * 
+	 * @param created
+	 */
 	public void setCreated(Timestamp created) {
 		this.created = created;
 	}

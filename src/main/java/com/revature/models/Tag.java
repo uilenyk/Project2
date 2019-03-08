@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,7 +26,6 @@ public class Tag {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer tagid;
 
-	@NotNull
 	@Column(unique = true)
 	private String tagName;
 
@@ -36,26 +34,50 @@ public class Tag {
 //	@JsonBackReference(value = "listings")
 	private List<Listing> listings;
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getTagid() {
 		return tagid;
 	}
 
+	/**
+	 * 
+	 * @param tagid
+	 */
 	public void setTagid(Integer tagid) {
 		this.tagid = tagid;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getTagName() {
 		return tagName;
 	}
 
+	/**
+	 * 
+	 * @param tagName
+	 */
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Listing> getListings() {
 		return listings;
 	}
 
+	/**
+	 * 
+	 * @param listings
+	 */
 	public void setListings(List<Listing> listings) {
 		this.listings = listings;
 	}

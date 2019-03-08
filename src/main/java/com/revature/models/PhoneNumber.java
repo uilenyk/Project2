@@ -4,13 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,35 +31,67 @@ public class PhoneNumber implements Serializable {
 
 	public PhoneNumber() {
 	}
-	
+
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getAreaCodeThree() {
 		return this.areaCodeThree;
 	}
 
+	/**
+	 * 
+	 * @param areaCodeThree
+	 */
 	public void setAreaCodeThree(Integer areaCodeThree) {
 		this.areaCodeThree = areaCodeThree;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getBlockFour() {
 		return this.blockFour;
 	}
 
+	/**
+	 * 
+	 * @param blockFour
+	 */
 	public void setBlockFour(Integer blockFour) {
 		this.blockFour = blockFour;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer getBlockThree() {
 		return this.blockThree;
 	}
 
+	/**
+	 * 
+	 * @param blockThree
+	 */
 	public void setBlockThree(Integer blockThree) {
 		this.blockThree = blockThree;
 	}
@@ -106,12 +135,11 @@ public class PhoneNumber implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "PhoneNumber [id=" + id + ", areaCodeThree=" + areaCodeThree + ", blockFour=" + blockFour
 				+ ", blockThree=" + blockThree + "]";
 	}
 
-	
 }

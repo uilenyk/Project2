@@ -20,9 +20,9 @@ import com.revature.models.CreditCard;
 import com.revature.models.Images;
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
-import com.revature.models.reponse.BuyerReceipt;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
+import com.revature.models.response.BuyerReceipt;
 
 @Repository
 public class ListingRepository {

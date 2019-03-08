@@ -49,8 +49,4 @@ public class MarketPlaceUserService {
 		return user;
 	}
 
-//	public MarketPlaceUser findUserByCredentials(LoginRequest loginRequest) {
-//		return repository.findUserByCredentials(loginRequest);
-//	}
-
 }
