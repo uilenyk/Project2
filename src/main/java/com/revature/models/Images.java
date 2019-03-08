@@ -9,8 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name = "images")
 public class Images implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -22,6 +26,7 @@ public class Images implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "listing_id")
+	@JsonBackReference(value = "images")
 	private Listing listing;
 
 	public int getId() {

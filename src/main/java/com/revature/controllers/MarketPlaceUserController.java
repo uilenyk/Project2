@@ -71,7 +71,6 @@ public class MarketPlaceUserController {
 
 	@PutMapping(path="/personal/update")
 	public @ResponseBody ResponseEntity<?> updateUser(@RequestBody MarketPlaceUser user) {
-		System.out.println(user.toString());
 		MarketPlaceUser updatedUser = marketPlaceUserService.updateUser(user);
 		if (updatedUser != null) {
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);

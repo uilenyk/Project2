@@ -17,31 +17,31 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="message")
+@Table(name = "message")
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="sender_id")
-	//@JsonManagedReference(value="sent_messages")
+	@JoinColumn(name = "sender_id")
+	// @JsonManagedReference(value="sent_messages")
 	private MarketPlaceUser sender;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="receiver_id")
-	//@JsonManagedReference(value="received_messages")
+	@JoinColumn(name = "receiver_id")
+	// @JsonManagedReference(value="received_messages")
 	private MarketPlaceUser receiver;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="parent_message_id")
+	@JoinColumn(name = "parent_message_id")
 	private Message parent;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String subject;
-	@Column(length=750)
+	@Column(length = 750)
 	private String content;
 	@CreationTimestamp
 	private Timestamp created;
@@ -182,6 +182,5 @@ public class Message implements Serializable {
 		return "Message [id=" + id + ", sender=" + sender + ", receiver=" + receiver + ", parent=" + parent
 				+ ", subject=" + subject + ", content=" + content + ", created=" + created + "]";
 	}
-	
-	
+
 }

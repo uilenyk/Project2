@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -29,12 +30,18 @@ public class MarketPlaceUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mpuid;
 
+	@NotNull
 	@Column(length = 50)
 	private String firstname;
+
+	@NotNull
 	@Column(length = 50)
 	private String lastname;
-	@Column(length = 50, nullable = false, unique = true)
+
+	@NotNull
+	@Column(length = 50, unique = true)
 	private String pseudoname;
+
 	// has the user gotten a new message
 	@Column(name = "new_message", columnDefinition = "boolean default false")
 	private boolean newMessage;
@@ -53,6 +60,11 @@ public class MarketPlaceUser implements Serializable {
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "phone_number_id")
 	private PhoneNumber phoneNumber;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "mpu_id")
+	@JsonBackReference(value = "listings")
+	private List<Listing> listings;
 
 	// bi-directional many-to-one association to MarketPlaceUserListing
 	@OneToMany(fetch = FetchType.LAZY)
@@ -170,13 +182,12 @@ public class MarketPlaceUser implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-
 	public List<Listing> getListings() {
-		return marketPlaceUserListings;
+		return listings;
 	}
 
 	public void setListings(List<Listing> listings) {
-		marketPlaceUserListings = listings;
+		this.listings = listings;
 	}
 	
 	@Override

@@ -7,17 +7,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.revature.models.Listing;
+import com.revature.models.reponse.BuyerReceipt;
 import com.revature.models.requests.ListingPatchRequest;
 import com.revature.models.requests.MakeInactiveRequest;
 import com.revature.services.ListingService;
@@ -59,9 +63,9 @@ public class ListingController {
 	}
 
 	@PatchMapping(path = "/{listid}")
-	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") String listid,
+	public @ResponseBody ResponseEntity<Void> editListing(@PathVariable("listid") int listid,
 			@RequestBody ListingPatchRequest request) {
-		request.setListid(Integer.parseInt(listid));
+		request.setListid(listid);
 		listingService.patch(request);
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
@@ -74,10 +78,24 @@ public class ListingController {
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
 
+	@PutMapping(path = "/{buyer_id}")
+	public ResponseEntity<BuyerReceipt> buyListing(@RequestBody Listing listing,
+			@PathVariable("buyer_id") int buyerId) {
+		BuyerReceipt receipt = listingService.buyListing(listing, buyerId);
+		return new ResponseEntity<>(receipt, HttpStatus.OK);
+	}
+
 	@DeleteMapping(path = "/{listid}")
 	public @ResponseBody ResponseEntity<Void> deleteListing(@PathVariable("listid") String listid) {
 		listingService.delete(Integer.parseInt(listid));
 		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<String> handleHttpClientException(HttpClientErrorException e) {
+		String message = e.getMessage();
+		return ResponseEntity.status(e.getStatusCode()).body(message);
+
 	}
 
 }

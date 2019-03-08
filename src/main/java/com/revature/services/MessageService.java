@@ -39,10 +39,10 @@ public class MessageService {
 		receiver.setSentMessages(null);
 		receiver.setReceivedMessages(null);
 		newMessage.setReceiver(receiver);
-		log.debug("in message service: "+newMessage.toString());
+		//log.debug("in message service: "+newMessage.toString());
 		Message message = repository.createMessage(newMessage, 0);
 		if(message != null) {
-			mpus.messageAlert(newMessage.getReceiver());
+			//mpus.messageAlert(newMessage.getReceiver());
 			return new ResponseEntity<>(message, HttpStatus.CREATED);
 		} else {
 			return null;

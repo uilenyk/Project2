@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.revature.models.Address;
 import com.revature.models.Credential;
 import com.revature.models.CreditCard;
+import com.revature.models.Images;
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
 import com.revature.models.PhoneNumber;
@@ -34,16 +35,27 @@ public class HibernateConfig {
 
 		// Set annotated Classes
 		Class<?>[] models = { MarketPlaceUser.class, Address.class, Credential.class, CreditCard.class, Listing.class,
-				PhoneNumber.class, Tag.class};
+				PhoneNumber.class, Message.class, Tag.class, Images.class};
 
 		factoryBean.setAnnotatedClasses(models);
 		factoryBean.setDataSource(getDataSource2());
 		return factoryBean;
 	}
 
+//	@Bean(name = "dataSource")
+//	public DataSource getDataSource() {
+//		System.out.println("Configuring data source");
+//		BasicDataSource dataSource = new BasicDataSource();
+//		dataSource.setDriverClassName("org.postgresql.Driver");
+//		dataSource.setUrl(System.getenv("PROJECT2_URL"));
+//		dataSource.setUsername(System.getenv("PROJECT2_USER"));
+//		dataSource.setPassword(System.getenv("PROJECT2_PASS"));
+//		return dataSource;
+//	}
+
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
-		System.out.println("Configuring data source");
+		System.out.println("Configuring data source 2");
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl(System.getenv("PROJECT2_URL"));
