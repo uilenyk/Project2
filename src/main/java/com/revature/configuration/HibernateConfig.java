@@ -18,6 +18,7 @@ import com.revature.models.Address;
 import com.revature.models.Credential;
 import com.revature.models.CreditCard;
 import com.revature.models.Images;
+import com.revature.models.Message;
 import com.revature.models.Listing;
 import com.revature.models.MarketPlaceUser;
 import com.revature.models.PhoneNumber;
